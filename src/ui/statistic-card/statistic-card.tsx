@@ -6,7 +6,7 @@ export type Props = {
   value: number;
 };
 
-export default function StatCard(props: Props) {
+export default function StatisticCard(props: Props) {
   return (
     <div
       className={clsx(

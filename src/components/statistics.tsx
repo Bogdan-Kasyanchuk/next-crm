@@ -1,4 +1,4 @@
-import StatCard from '@/ui/stat-card/stat-card';
+import StatisticCard from '@/ui/statistic-card/statistic-card';
 
 const data = [
   {
@@ -24,7 +24,7 @@ export default async function Statistics() {
     <div className="grid grid-cols-2 gap-5 xl:grid-cols-4">
       {data.map((item) => (
         <div key={item.label}>
-          <StatCard label={item.label} value={item.value} />
+          <StatisticCard label={item.label} value={item.value} />
         </div>
       ))}
     </div>
