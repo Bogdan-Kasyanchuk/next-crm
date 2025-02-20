@@ -1,28 +1,28 @@
-import { fetchSalesData } from '@/lib/data';
+import { fetchPromotionsData } from '@/lib/data';
 import DashboardCard from '@/ui/dashboard-card';
 import SummaryTable from '@/ui/summary-table/summary-table';
 import SummaryTableCell from '@/ui/summary-table/summary-table-cell';
 import SummaryTableHeader from '@/ui/summary-table/summary-table-header';
 
-export default async function Sales() {
-    const sales = await fetchSalesData();
+export default async function Promotions() {
+    const promotions = await fetchPromotionsData();
 
     return (
-        <DashboardCard label='Sales details'>
+        <DashboardCard label='Promotions'>
             <SummaryTable
                 headers={
                     <>
                         <SummaryTableHeader>Company</SummaryTableHeader>
-                        <SummaryTableHeader align='center'>Sold</SummaryTableHeader>
-                        <SummaryTableHeader align='center'>Income</SummaryTableHeader>
+                        <SummaryTableHeader>Name</SummaryTableHeader>
+                        <SummaryTableHeader align='center'>%</SummaryTableHeader>
                     </>
                 }
             >
-                {sales.map((item, i) => (
+                {promotions.map((item, i) => (
                     <tr key={i}>
+                        <SummaryTableCell>{item.company}</SummaryTableCell>
                         <SummaryTableCell>{item.title}</SummaryTableCell>
-                        <SummaryTableCell align='center'>{item.sold}</SummaryTableCell>
-                        <SummaryTableCell align='center'>{`$${item.income}`}</SummaryTableCell>
+                        <SummaryTableCell align='center'>{`-${item.discount}%`}</SummaryTableCell>
                     </tr>
                 ))}
             </SummaryTable>

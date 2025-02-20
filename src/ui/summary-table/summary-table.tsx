@@ -1,19 +1,19 @@
 import { ReactNode } from 'react';
 
 export type Props = {
-  headers: ReactNode;
-  children?: ReactNode;
+    headers: ReactNode;
+    children?: ReactNode;
 };
 
 export default function SummaryTable(props: Props) {
-  return (
-    <table className="w-full border-separate table-auto border-spacing-0">
-      <thead>
-        <tr>{props.headers}</tr>
-      </thead>
-      <tbody className="[&>tr:nth-child(2n)]:bg-gray-100 [&>tr:nth-child(2n+1)]:bg-white">
-        {props.children}
-      </tbody>
-    </table>
-  );
+    return (
+        <table className='w-full border-separate table-auto border-spacing-0'>
+            <thead>
+                <tr>{props.headers}</tr>
+            </thead>
+            <tbody className='[&>tr:nth-child(2n)]:bg-gray-100 [&>tr:nth-child(2n+1)]:bg-white'>
+                {props.children}
+            </tbody>
+        </table>
+    );
 }

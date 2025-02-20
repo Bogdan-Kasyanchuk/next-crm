@@ -2,7 +2,7 @@ import { StatisticCardTypes } from '@/enums';
 import { fetchStatisticsData } from '@/lib/data';
 import StatisticCard from '@/ui/statistic-card/statistic-card';
 
-export default async function Statistics() {
+export default async function Page() {
     const statistics = await fetchStatisticsData();
 
     return (

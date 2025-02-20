@@ -4,15 +4,15 @@ import Button from '@/ui/button';
 import React from 'react';
 
 export interface ErrorComponentProps {
-  error: Error;
-  reset: () => void;
+    error: Error;
+    reset: () => void;
 }
 
 export default function ErrorComponent({ error, reset }: ErrorComponentProps) {
-  return (
-    <div>
-      <p>{`Something went wrong. ${error.message}`}</p>
-      <Button onClick={() => reset()}>Try again</Button>
-    </div>
-  );
+    return (
+        <div>
+            <p>{`Something went wrong. ${error.message}`}</p>
+            <Button onClick={() => reset()}>Try again</Button>
+        </div>
+    );
 }

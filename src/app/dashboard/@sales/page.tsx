@@ -4,7 +4,7 @@ import SummaryTable from '@/ui/summary-table/summary-table';
 import SummaryTableCell from '@/ui/summary-table/summary-table-cell';
 import SummaryTableHeader from '@/ui/summary-table/summary-table-header';
 
-export default async function Sales() {
+export default async function Page() {
     const sales = await fetchSalesData();
 
     return (
