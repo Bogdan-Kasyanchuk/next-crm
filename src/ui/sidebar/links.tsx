@@ -14,7 +14,7 @@ const links = [
     },
     {
         name: 'Companies',
-        href: '/dashboard/companies',
+        href: '/companies',
         icon: '/icons/briefcase.svg',
     },
 ];
