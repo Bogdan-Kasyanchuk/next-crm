@@ -1,13 +1,13 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 :root {
-  --background: #fafafa;
-  --foreground: #000;
+    --background: #fafafa;
+    --foreground: #000;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+    --color-background: var(--background);
+    --color-foreground: var(--foreground);
 }
 
 html {
@@ -17,12 +17,16 @@ html {
 
 body {
     scroll-behavior: smooth;
-    height: 100%;
+
     display: flex;
     flex-direction: column;
-    background-color: var(--background);
-    color: var(--foreground);
+
+    height: 100%;
+
     line-height: 1.25;
+    color: var(--foreground);
+
+    background-color: var(--background);
 }
 
 main {
@@ -39,11 +43,12 @@ button {
     flex-grow: 1;
 
     &__content {
+        overflow-y: auto;
         display: grid;
         grid-template-columns: repeat(12, minmax(0, 1fr));
-        gap: 20px;
-        padding: 20px;
-        overflow-y: auto;
         flex-grow: 1;
+        gap: 20px;
+
+        padding: 20px;
     }
 }

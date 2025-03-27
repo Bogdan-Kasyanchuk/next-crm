@@ -1,8 +1,8 @@
-import styles from './styles.module.css';
+import './loader.css';
 export default function Loader() {
     return (
-        <div className={styles.root}>
-            <div className={styles.loader}></div>
+        <div className='c-loader'>
+            <div className='c-loader__inner'></div>
         </div>
     );
 }

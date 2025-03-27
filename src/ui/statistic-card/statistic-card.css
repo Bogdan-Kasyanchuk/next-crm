@@ -1,0 +1,21 @@
+.c-statistic-card {
+    &__gradient {
+        background-size: cover;
+
+        &:nth-child(4n + 1) {
+            background-image: url('/images/mesh-gradient-1.svg');
+        }
+
+        &:nth-child(4n + 2) {
+            background-image: url('/images/mesh-gradient-2.svg');
+        }
+
+        &:nth-child(4n + 3) {
+            background-image: url('/images/mesh-gradient-3.svg');
+        }
+
+        &:nth-child(4n + 4) {
+            background-image: url('/images/mesh-gradient-4.svg');
+        }
+    }
+}
