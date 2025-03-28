@@ -1,5 +1,7 @@
 import { CompanyStatus } from '@/enums';
-import { Company, CountriesCompanies, Promotions, SalesDetails, StatisticCard } from '@/types';
+import { Company, CountriesCompanies, Promotion, Promotions, SalesDetails, StatisticCard } from '@/types';
+
+import { randomImage } from './randomImage';
 
 export const statisticsData: StatisticCard[] = [
     {
@@ -202,7 +204,7 @@ export const categoriesData: StatisticCard[] = [
 export const companiesData: Company[] = [
     {
         category: 'Products',
-        avatar: '/images/costo.png',
+        avatar: randomImage(40, 40),
         title: 'Costco Wholesale',
         status: CompanyStatus.ACTIVE,
         hasPromotions: true,
@@ -211,7 +213,7 @@ export const companiesData: Company[] = [
     },
     {
         category: 'Products',
-        avatar: '/images/costo.png',
+        avatar: randomImage(40, 40),
         title: 'Costco Wholesale',
         status: CompanyStatus.NOT_ACTIVE,
         hasPromotions: false,
@@ -220,7 +222,7 @@ export const companiesData: Company[] = [
     },
     {
         category: 'Products',
-        avatar: '/images/costo.png',
+        avatar: randomImage(40, 40),
         title: 'Costco Wholesale',
         status: CompanyStatus.PENDING,
         hasPromotions: true,
@@ -229,7 +231,7 @@ export const companiesData: Company[] = [
     },
     {
         category: 'Products',
-        avatar: '/images/costo.png',
+        avatar: randomImage(40, 40),
         title: 'Costco Wholesale',
         status: CompanyStatus.SUSPENDED,
         hasPromotions: false,
@@ -238,7 +240,7 @@ export const companiesData: Company[] = [
     },
     {
         category: 'Products',
-        avatar: '/images/costo.png',
+        avatar: randomImage(40, 40),
         title: 'Costco Wholesale',
         status: CompanyStatus.ACTIVE,
         hasPromotions: true,
@@ -247,7 +249,7 @@ export const companiesData: Company[] = [
     },
     {
         category: 'Products',
-        avatar: '/images/costo.png',
+        avatar: randomImage(40, 40),
         title: 'Costco Wholesale',
         status: CompanyStatus.NOT_ACTIVE,
         hasPromotions: false,
@@ -256,7 +258,7 @@ export const companiesData: Company[] = [
     },
     {
         category: 'Products',
-        avatar: '/images/costo.png',
+        avatar: randomImage(40, 40),
         title: 'Costco Wholesale',
         status: CompanyStatus.PENDING,
         hasPromotions: true,
@@ -265,11 +267,115 @@ export const companiesData: Company[] = [
     },
     {
         category: 'Products',
-        avatar: '/images/costo.png',
+        avatar: randomImage(40, 40),
         title: 'Costco Wholesale',
         status: CompanyStatus.SUSPENDED,
         hasPromotions: false,
         country: 'USA',
         joinedAt: '2023-07-14T15:00:00+03:00',
+    },
+];
+
+export const companyData: Company = {
+    category: 'Products',
+    avatar: randomImage(80, 80),
+    title: 'Costco Wholesale',
+    status: CompanyStatus.ACTIVE,
+    hasPromotions: true,
+    country: 'USA',
+    joinedAt: '2023-07-14T15:00:00+03:00',
+    description: 'Worem ipsum dolor sit amet, consectetur adipiscing elit. Nunc vulputate libero et velit interdum, ac aliquet odio mattis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.',
+}
+
+export const companyPromotionsData: Promotion[] = [
+    {
+        title: 'Norem ipsum dolor ',
+        description: 'Jorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        discount: 40,
+        image: randomImage(335, 200),
+    },
+    {
+        title: 'Norem ipsum dolor ',
+        description: 'Jorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        discount: 4,
+        image: randomImage(335, 200),
+    },
+    {
+        title: 'Norem ipsum dolor ',
+        description: 'Jorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        discount: 40,
+        image: randomImage(335, 200),
+    },
+    {
+        title: 'Norem ipsum dolor ',
+        description: 'Jorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        discount: 4,
+        image: randomImage(335, 200),
+    },
+    {
+        title: 'Norem ipsum dolor ',
+        description: 'Jorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        discount: 80,
+        image: randomImage(335, 200),
+    },
+    {
+        title: 'Norem ipsum dolor ',
+        description: 'Jorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        discount: 33,
+        image: randomImage(335, 200),
+    },
+    {
+        title: 'Norem ipsum dolor ',
+        description: 'Jorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        discount: 40,
+        image: randomImage(335, 200),
+    },
+    {
+        title: 'Norem ipsum dolor ',
+        description: 'Jorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        discount: 4,
+        image: randomImage(335, 200),
+    },
+    {
+        title: 'Norem ipsum dolor ',
+        description: 'Jorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        discount: 40,
+        image: randomImage(335, 200),
+    },
+    {
+        title: 'Norem ipsum dolor ',
+        description: 'Jorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        discount: 40,
+        image: randomImage(335, 200),
+    },
+    {
+        title: 'Norem ipsum dolor ',
+        description: 'Jorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        discount: 4,
+        image: randomImage(335, 200),
+    },
+    {
+        title: 'Norem ipsum dolor ',
+        description: 'Jorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        discount: 40,
+        image: randomImage(335, 200),
+    },
+    {
+        title: 'Norem ipsum dolor ',
+        description: 'Jorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        discount: 40,
+        image: randomImage(335, 200),
+    },
+    {
+        title: 'Norem ipsum dolor ',
+        description: 'Jorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        discount: 4,
+        image: randomImage(335, 200),
+    },
+    {
+        title: 'Norem ipsum dolor ',
+        description: 'Jorem ipsum dolor sit amet, consectetur adipiscing elit.',
+        discount: 40,
+        image: randomImage(335, 200),
     },
 ];

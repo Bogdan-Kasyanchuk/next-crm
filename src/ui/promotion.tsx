@@ -1,27 +1,17 @@
-import React from 'react';
 import Image from 'next/image';
+import React from 'react';
 
-export type Promotion = {
-  id: string;
-  title: string;
-  description: string;
-  discount: number;
-  companyId: string;
-  companyTitle: string;
-  avatar?: string;
-}
+import { Promotion as PromotionType } from '@/types';
 
-export type PromotionProps = {
-  promotion: Promotion;
+type PromotionProps = {
+  promotion: PromotionType;
 }
 
 export default function Promotion({ promotion }: PromotionProps) {
   return (
     <div className="rounded overflow-hidden	bg-gray-100">
       <div className="relative w-full h-40 bg-gray-300">
-        {promotion.avatar && (
-          <Image fill src={promotion.avatar} alt="promotion avatar" />
-        )}
+        <Image fill src={promotion.image} alt="promotion avatar" />
         <div className="w-14 h-14 absolute top-0 left-px rounded-br-full bg-lime-200" />
         <div className="w-14 h-14 absolute inset-0 py-3 pr-3 pl-0.5 rounded-br-full bg-gray-900">
           <p className="text-center text-xs font-bold text-lime-200">{`-${promotion.discount}%`}</p>

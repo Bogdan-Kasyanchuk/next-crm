@@ -1,7 +1,8 @@
-import { fetchCountriesData } from '@/lib/data';
-import DashboardCard from '@/ui/dashboard-card';
 import clsx from 'clsx';
 import Image from 'next/image';
+
+import { fetchCountriesData } from '@/lib/data';
+import DashboardCard from '@/ui/dashboard-card';
 
 export default async function Countries() {
     const countries = await fetchCountriesData();

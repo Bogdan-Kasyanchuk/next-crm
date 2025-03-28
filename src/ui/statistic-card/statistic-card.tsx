@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+
 import './statistic-card.css';
 import { StatisticCardTypes } from '@/enums';
 import { StatisticCard as StatisticCardType } from '@/types';

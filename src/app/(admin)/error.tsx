@@ -1,7 +1,8 @@
 'use client';
 
-import Button from '@/ui/button';
 import React from 'react';
+
+import Button from '@/ui/button';
 
 type Props = {
     error: Error;

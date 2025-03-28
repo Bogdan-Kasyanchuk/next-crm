@@ -7,9 +7,10 @@ export type Company = {
     avatar: string;
     title: string;
     status: CompanyStatus;
-    hasPromotions: boolean;
+    hasPromotions?: boolean;
     country: string;
     joinedAt: string;
+    description?: string;
 };
 
 export type StatisticCard = {
@@ -33,3 +34,10 @@ export type CountriesCompanies = Array<{
     title: string;
     count: number;
 }>;
+
+export type Promotion = {
+    title: string;
+    description: string;
+    discount: number;
+    image: string;
+}

@@ -5,7 +5,9 @@ import {
     promotionsData,
     countriesData,
     companiesData,
-} from './placeholder-data';
+    companyPromotionsData,
+    companyData
+} from '../mock/data';
 
 export async function fetchCategoriesData() {
     try {
@@ -67,6 +69,28 @@ export async function fetchCompaniesData() {
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
         return companiesData;
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error('Failed to fetch data.');
+    }
+}
+
+export async function fetchCompanyData() {
+    try {
+        await new Promise((resolve) => setTimeout(resolve, 500));
+
+        return companyData;
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error('Failed to fetch data.');
+    }
+}
+
+export async function fetchCompanyPromotionsData() {
+    try {
+        await new Promise((resolve) => setTimeout(resolve, 1000));
+
+        return companyPromotionsData;
     } catch (error) {
         console.error('Error:', error);
         throw new Error('Failed to fetch data.');

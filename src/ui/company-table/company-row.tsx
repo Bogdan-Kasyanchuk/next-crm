@@ -1,9 +1,11 @@
-import React from 'react';
-import Image from 'next/image';
 import clsx from 'clsx';
-import StatusLabel from '../status-label';
-import { Company } from '@/types';
+import Image from 'next/image';
+import React from 'react';
+
 import { CompanyStatus } from '@/enums';
+import { Company } from '@/types';
+
+import StatusLabel from '../status-label';
 
 type Props = {
     company: Company;
@@ -29,6 +31,7 @@ export default function CompanyRow(props: Props) {
                         height={32}
                         src={props.company.avatar || '/images/costo.png'}
                         alt={props.company.title}
+                        className='rounded-full'
                     />
                     {props.company.title}
                 </div>

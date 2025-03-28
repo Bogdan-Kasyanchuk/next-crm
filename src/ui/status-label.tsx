@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+
 import { CompanyStatus } from '@/enums';
 
 type Props = {
