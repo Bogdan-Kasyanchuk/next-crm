@@ -1,9 +1,9 @@
-export enum StatisticCardTypes {
+export enum StatisticCardType {
     DARK = 'dark',
     GRADIENT = 'gradient',
 }
 
-export enum CompanyStatus {
+export enum CompanyStatusType {
     ACTIVE = 'active',
     NOT_ACTIVE = 'notActive',
     PENDING = 'pending',

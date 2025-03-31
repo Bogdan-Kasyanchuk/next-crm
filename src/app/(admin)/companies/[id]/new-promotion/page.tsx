@@ -3,7 +3,8 @@
 import PromotionForm from "@/ui/promotion-form";
 
 export default function Page() {
-  return (
-    <PromotionForm />
-  );
+    return (
+        <div>New Promotion</div>
+        // <PromotionForm />
+    );
 }

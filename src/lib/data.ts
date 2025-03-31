@@ -6,19 +6,7 @@ import {
     countriesData,
     companiesData,
     companyPromotionsData,
-    companyData
-} from '../mock/data';
-
-export async function fetchCategoriesData() {
-    try {
-        await new Promise((resolve) => setTimeout(resolve, 500));
-
-        return categoriesData;
-    } catch (error) {
-        console.error('Error:', error);
-        throw new Error('Failed to fetch data.');
-    }
-}
+} from '@/mock/data';
 
 export async function fetchStatisticsData() {
     try {
@@ -36,6 +24,17 @@ export async function fetchSalesData() {
         await new Promise((resolve) => setTimeout(resolve, 1750));
 
         return salesData;
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error('Failed to fetch data.');
+    }
+}
+
+export async function fetchCategoriesData() {
+    try {
+        await new Promise((resolve) => setTimeout(resolve, 500));
+
+        return categoriesData;
     } catch (error) {
         console.error('Error:', error);
         throw new Error('Failed to fetch data.');
@@ -75,9 +74,11 @@ export async function fetchCompaniesData() {
     }
 }
 
-export async function fetchCompanyData() {
+export async function fetchCompanyData(id: string) {
+    const companyData = companiesData.find((company) => company.id === id);
+
     try {
-        await new Promise((resolve) => setTimeout(resolve, 500));
+        await new Promise((resolve) => setTimeout(resolve, 750));
 
         return companyData;
     } catch (error) {
@@ -86,11 +87,14 @@ export async function fetchCompanyData() {
     }
 }
 
-export async function fetchCompanyPromotionsData() {
+export async function fetchCompanyPromotionsData(id: string) {
+    const promotionsData = companyPromotionsData.filter(
+        (promotion) => promotion.companyId === id);
+
     try {
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
-        return companyPromotionsData;
+        return promotionsData;
     } catch (error) {
         console.error('Error:', error);
         throw new Error('Failed to fetch data.');

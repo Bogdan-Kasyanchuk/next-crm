@@ -2,10 +2,16 @@
 
 import { useRouter } from 'next/navigation';
 
-import PromotionFormModal from '@/ui/promotion-form-modal';
+import Modal from '@/ui/modal';
+import PromotionForm from '@/ui/promotion-form';
 
 export default function Page() {
-  const router = useRouter();
+    const router = useRouter();
 
-  return <PromotionFormModal show={true} onClose={() => { router.back() }} />;
+    return (
+        <Modal show={true} onClose={() => { router.back() }} >
+            <div>New Promotion</div>
+            {/* <PromotionForm onSubmit={() => { router.back() }} /> */}
+        </Modal>
+    )
 }

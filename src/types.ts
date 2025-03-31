@@ -1,43 +1,56 @@
-import { CompanyStatus } from './enums';
+import { CompanyStatusType } from './enums';
 
 export type Align = 'left' | 'center' | 'right';
 
-export type Company = {
-    category: string;
-    avatar: string;
+export type CompanyMapper = {
+    id: string;
     title: string;
-    status: CompanyStatus;
-    hasPromotions?: boolean;
-    country: string;
+    logo: string;
+    category: string;
+    status: CompanyStatusType;
+    country: {
+        title: string;
+        code: string;
+    };
     joinedAt: string;
+    hasPromotions: boolean;
     description?: string;
 };
 
-export type StatisticCard = {
+export type PromotionMapper = {
+    id: string;
+    companyId: string;
+    title: string;
+    image: string;
+    discount: number;
+    description?: string;
+}
+
+export type StatisticsMapper = Array<{
     label: string;
     value: number;
-};
+}>;
 
-export type SalesDetails = Array<{
+export type SalesMapper = Array<{
+    id: string;
     title: string;
+    logo: string;
     sold: number;
     income: number;
 }>;
 
-export type Promotions = Array<{
-    company: string;
+export type PromotionsMapper = Array<{
     title: string;
     discount: number;
+    company: {
+        id: string;
+        title: string;
+        logo: string;
+    }
 }>;
 
-export type CountriesCompanies = Array<{
+export type CountriesMapper = Array<{
     title: string;
-    count: number;
+    code: string;
+    countCompanies: number;
 }>;
-
-export type Promotion = {
-    title: string;
-    description: string;
-    discount: number;
-    image: string;
-}

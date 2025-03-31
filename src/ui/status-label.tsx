@@ -1,18 +1,18 @@
 import clsx from 'clsx';
 
-import { CompanyStatus } from '@/enums';
+import { CompanyStatusType } from '@/enums';
 
 type Props = {
-    status: CompanyStatus;
+    status: CompanyStatusType;
     disabled?: boolean;
 };
 
 export default function StatusLabel(props: Props) {
     const labelByStatus = {
-        [CompanyStatus.ACTIVE]: 'Active',
-        [CompanyStatus.NOT_ACTIVE]: 'Not Active',
-        [CompanyStatus.PENDING]: 'Pending',
-        [CompanyStatus.SUSPENDED]: 'Suspended',
+        [CompanyStatusType.ACTIVE]: 'Active',
+        [CompanyStatusType.NOT_ACTIVE]: 'Not Active',
+        [CompanyStatusType.PENDING]: 'Pending',
+        [CompanyStatusType.SUSPENDED]: 'Suspended',
     };
 
     const label = labelByStatus[props.status];
@@ -21,10 +21,10 @@ export default function StatusLabel(props: Props) {
         <div
             className={clsx(
                 'inline-flex items-center py-1 px-2.5 gap-1.5 rounded-3xl text-sm font-semibold',
-                props.status === CompanyStatus.ACTIVE && 'text-green-700 bg-green-100',
-                props.status === CompanyStatus.NOT_ACTIVE && 'text-red-700 bg-red-100',
-                props.status === CompanyStatus.PENDING && 'text-orange-700 bg-orange-100',
-                props.status === CompanyStatus.SUSPENDED && 'text-blue-700 bg-blue-100',
+                props.status === CompanyStatusType.ACTIVE && 'text-green-700 bg-green-100',
+                props.status === CompanyStatusType.NOT_ACTIVE && 'text-red-700 bg-red-100',
+                props.status === CompanyStatusType.PENDING && 'text-orange-700 bg-orange-100',
+                props.status === CompanyStatusType.SUSPENDED && 'text-blue-700 bg-blue-100',
                 {
                     ['opacity-75 cursor-not-allowed']: props.disabled,
                 }

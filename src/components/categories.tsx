@@ -1,4 +1,4 @@
-import { StatisticCardTypes } from '@/enums';
+import { StatisticCardType } from '@/enums';
 import { fetchCategoriesData } from '@/lib/data';
 import StatisticCard from '@/ui/statistic-card/statistic-card';
 
@@ -7,9 +7,17 @@ export default async function Categories() {
 
     return (
         <div className='grid h-full grid-cols-4 gap-3'>
-            {categories.map((category, i) => (
-                <StatisticCard key={i} type={StatisticCardTypes.DARK} stat={category} />
-            ))}
+            {
+                categories.map(
+                    (category, i) => (
+                        <StatisticCard
+                            key={i}
+                            type={StatisticCardType.DARK}
+                            statistic={category}
+                        />
+                    )
+                )
+            }
         </div>
     );
 }

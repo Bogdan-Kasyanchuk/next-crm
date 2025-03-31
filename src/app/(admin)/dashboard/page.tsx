@@ -19,21 +19,25 @@ export default async function Page() {
                         <Statistics />
                     </Suspense>
                 </div>
+
                 <div className='col-span-12 h-[276px] xl:col-span-5 xl:h-[248px]'>
                     <Suspense fallback={<Loader />}>
                         <Sales />
                     </Suspense>
                 </div>
+
                 <div className='col-span-12 h-[248px] xl:col-span-7'>
                     <Suspense fallback={<Loader />}>
                         <Categories />
                     </Suspense>
                 </div>
+
                 <div className='col-span-12 h-[351px] xl:col-span-6 2xl:h-[388px]'>
                     <Suspense fallback={<Loader />}>
                         <Countries />
                     </Suspense>
                 </div>
+
                 <div className='col-span-12 h-[384px] xl:col-span-6 xl:h-[351px] 2xl:h-[388px]'>
                     <Suspense fallback={<Loader />}>
                         <Promotions />
