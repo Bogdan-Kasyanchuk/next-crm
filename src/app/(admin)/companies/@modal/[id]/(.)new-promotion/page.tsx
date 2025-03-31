@@ -10,8 +10,7 @@ export default function Page() {
 
     return (
         <Modal show={true} onClose={() => { router.back() }} >
-            <div>New Promotion</div>
-            {/* <PromotionForm onSubmit={() => { router.back() }} /> */}
+            <PromotionForm onSubmit={() => { router.back() }} />
         </Modal>
     )
 }

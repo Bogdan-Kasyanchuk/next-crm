@@ -2,7 +2,7 @@
 
 import { Form, Formik } from 'formik';
 
-import { CompanyStatus } from '@/enums';
+import { CompanyStatusType } from '@/enums';
 import { categoriesData, countriesData } from '@/mock/data';
 
 import Button from './button';
@@ -12,7 +12,7 @@ import LogoUploader from './logo-uploader';
 export type CompanyFieldValues = {
     title: string;
     description: string;
-    status: CompanyStatus;
+    status: CompanyStatusType;
     joinedDate: string;
     categoryId: string;
     countryId: string;
@@ -21,7 +21,7 @@ export type CompanyFieldValues = {
 const initialValues: CompanyFieldValues = {
     title: '',
     description: '',
-    status: CompanyStatus.ACTIVE,
+    status: CompanyStatusType.ACTIVE,
     joinedDate: '',
     categoryId: '',
     countryId: '',
@@ -55,7 +55,7 @@ export default function CompanyForm({ onSubmit }: CompanyFormProps) {
                             as="select"
                             className="capitalize"
                         >
-                            {(Object.values(CompanyStatus) as CompanyStatus[]).map(
+                            {(Object.values(CompanyStatusType) as CompanyStatusType[]).map(
                                 (status) => (
                                     <option key={status} value={status}>
                                         {status}

@@ -78,7 +78,7 @@ export async function fetchCompanyData(id: string) {
     const companyData = companiesData.find((company) => company.id === id);
 
     try {
-        await new Promise((resolve) => setTimeout(resolve, 750));
+        await new Promise((resolve) => setTimeout(resolve, 250));
 
         return companyData;
     } catch (error) {
@@ -92,7 +92,7 @@ export async function fetchCompanyPromotionsData(id: string) {
         (promotion) => promotion.companyId === id);
 
     try {
-        await new Promise((resolve) => setTimeout(resolve, 1000));
+        await new Promise((resolve) => setTimeout(resolve, 500));
 
         return promotionsData;
     } catch (error) {
