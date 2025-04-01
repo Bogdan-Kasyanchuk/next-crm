@@ -9,3 +9,12 @@ export enum CompanyStatusType {
     PENDING = 'pending',
     SUSPENDED = 'suspended',
 }
+
+// Manufacturing
+// Trade
+// Services
+// Education
+// Finance
+// Construction
+// Science
+// Information

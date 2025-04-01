@@ -10,7 +10,7 @@ type Props = {
 export default function Header(props: Props) {
     return (
         <header className='flex items-center gap-5 px-[30px] py-5 border-b border-gray-300'>
-            <p className='grow text-3xl font-bold'>{props.children}</p>
+            {props.children}
             <div className='self-stretch w-px bg-gray-300' />
             <div className='flex items-center gap-2.5'>
                 <Image
@@ -21,8 +21,12 @@ export default function Header(props: Props) {
                     className='rounded-full'
                 />
                 <div>
-                    <p className='text-base font-semibold leading-tight'>Adam Smith</p>
-                    <p className='text-sm font-light text-gray-900 leading-tight'>adamsmith@gmail.com</p>
+                    <p className='text-base font-semibold leading-tight'>
+                        Adam Smith
+                    </p>
+                    <p className='text-sm font-light text-gray-900 leading-tight'>
+                        adamsmith@gmail.com
+                    </p>
                 </div>
             </div>
         </header>

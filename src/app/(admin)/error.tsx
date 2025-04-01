@@ -15,9 +15,11 @@ export default function ErrorComponent(props: Props) {
             <p>{`Something went wrong. ${props.error.message}`}</p>
 
             <Button
-                onClick={() => {
-                    props.reset();
-                }}
+                onClick={
+                    () => {
+                        props.reset();
+                    }
+                }
             >
                 Try again
             </Button>

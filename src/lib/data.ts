@@ -118,7 +118,7 @@ export async function fetchCompanyData(id: string) {
 
 export async function fetchCompanyPromotionsData(id: string) {
     try {
-        const data = await fetch(`${process.env.API_HOST}/promotions?companyId=${id}`);
+        const data = await fetch(`${process.env.API_HOST}/companies/${id}/promotions`);
 
         if (data.status === 404) {
             return [];

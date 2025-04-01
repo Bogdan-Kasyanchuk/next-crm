@@ -79,12 +79,12 @@ const eslintConfig = [
                     'location': 'tag-aligned'
                 }
             ],
-            'react/jsx-closing-tag-location': [
-                'error',
-                {
-                    'location': 'tag-aligned'
-                }
-            ],
+            // 'react/jsx-closing-tag-location': [
+            //     'error',
+            //     {
+            //         'location': 'tag-aligned'
+            //     }
+            // ],
         },
     }),
 ];

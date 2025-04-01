@@ -9,8 +9,16 @@ export default function Page() {
     const router = useRouter();
 
     return (
-        <Modal show={true} onClose={() => { router.back() }} >
-            <PromotionForm onSubmit={() => { router.back() }} />
+        <Modal
+            show={true}
+            onClose={
+                () => { router.back(); }
+            }
+        >
+            <PromotionForm onSubmit={
+                () => { router.back(); }
+            }
+            />
         </Modal>
-    )
+    );
 }

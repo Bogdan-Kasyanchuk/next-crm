@@ -10,13 +10,11 @@ import SearchInput from '@/ui/search-input';
 import Toolbar from '@/ui/toolbar';
 
 type Props = {
-    params: Promise<{ id: string }>
+    params: { id: string }
 };
 
 export default async function Page(props: Props) {
-    const { id } = await props.params;
-
-    const company = await fetchCompanyData(id);
+    const company = await fetchCompanyData(props.params.id);
 
     if (!company) {
         notFound();
@@ -24,7 +22,7 @@ export default async function Page(props: Props) {
 
     return (
         <div className='l-page__content'>
-            <Toolbar action={<AddPromotionButton id={id} />}>
+            <Toolbar action={<AddPromotionButton id={props.params.id} />}>
                 <SearchInput />
             </Toolbar>
 
@@ -34,7 +32,7 @@ export default async function Page(props: Props) {
 
             <div className="col-span-9">
                 <Suspense fallback={<Loader />}>
-                    <CompanyPromotions id={id} />
+                    <CompanyPromotions id={props.params.id} />
                 </Suspense>
             </div>
         </div>

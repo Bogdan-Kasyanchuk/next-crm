@@ -1,10 +1,11 @@
 import { ReactNode } from 'react';
 
+import Header from '@/ui/header';
 import Sidebar from '@/ui/sidebar/sidebar';
 
 type Props = {
     children: ReactNode;
-    header: ReactNode;
+    title: ReactNode;
 };
 
 export default function Layout(props: Props) {
@@ -13,7 +14,7 @@ export default function Layout(props: Props) {
             <Sidebar />
 
             <div className='l-page'>
-                {props.header}
+                <Header>{props.title}</Header>
 
                 {props.children}
             </div>

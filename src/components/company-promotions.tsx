@@ -14,26 +14,22 @@ export default async function CompanyPromotions(props: Props) {
         <>
             {
                 companyPromotions.length > 0
-                    ? (
-                        <div className="grid grid-cols-12 gap-5">
-                            {
-                                companyPromotions.map(
-                                    (promotion, index) => (
-                                        <div key={index}
-                                            className="col-span-4"
-                                        >
-                                            <Promotion promotion={promotion} />
-                                        </div>
-                                    )
+                    ? <div className="grid grid-cols-12 gap-5">
+                        {
+                            companyPromotions.map(
+                                (promotion, index) => (
+                                    <div key={index}
+                                        className="col-span-4"
+                                    >
+                                        <Promotion promotion={promotion} />
+                                    </div>
                                 )
-                            }
-                        </div>
-                    )
-                    : (
-                        <div className="flex items-center justify-center w-full h-full">
-                            <p className="text-5xl">No promotions</p>
-                        </div>
-                    )
+                            )
+                        }
+                    </div>
+                    : <div className="flex items-center justify-center w-full h-full">
+                        <p className="text-5xl">No promotions</p>
+                    </div>
             }
         </>
     );
