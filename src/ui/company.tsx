@@ -3,7 +3,6 @@ import Image from 'next/image';
 import { CompanyMapper } from '@/types';
 import StatusLabel from '@/ui/status-label';
 
-
 type CompanyProps = {
     company: CompanyMapper;
 }
@@ -18,7 +17,7 @@ export default function Company(props: CompanyProps) {
                         width={80}
                         height={80}
                         alt={props.company.title}
-                        className='rounded-full'
+                        className='rounded-full w-20 h-20'
                     />
                 </div>
                 <p className="pb text-base font-semibold text-white">{props.company.title}</p>

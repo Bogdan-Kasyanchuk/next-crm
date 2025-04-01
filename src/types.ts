@@ -2,7 +2,7 @@ import { CompanyStatusType } from './enums';
 
 export type Align = 'left' | 'center' | 'right';
 
-export type CompanyMapper = {
+export type CompanyShema = {
     id: string;
     title: string;
     logo: string;
@@ -14,6 +14,23 @@ export type CompanyMapper = {
     };
     joinedAt: string;
     hasPromotions: boolean;
+    sold: string,
+    income: string,
+    description?: string;
+};
+
+export type CompanyMapper = {
+    id: string;
+    title: string;
+    logo: string;
+    category: string;
+    status: CompanyStatusType;
+    country: {
+        title: string;
+        code: string;
+    };
+    joinedAt: string;
+    hasPromotions?: boolean;
     description?: string;
 };
 

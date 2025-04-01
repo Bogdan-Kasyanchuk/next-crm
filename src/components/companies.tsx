@@ -7,10 +7,14 @@ export default async function Companies() {
 
     return (
         <CompanyTable>
-            {companies.map(
-                (company, i) => (
-                    <CompanyRow key={i} company={company} />
-                ))}
+            {
+                companies.map(
+                    (company, i) => (
+                        <CompanyRow key={i}
+                            company={company}
+                        />
+                    ))
+            }
         </CompanyTable>
     );
 }
