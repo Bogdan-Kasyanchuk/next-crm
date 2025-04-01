@@ -9,7 +9,10 @@ export default function Home() {
                 <span className='font-bold text-red-500'>TrueScape</span>
             </h1>
 
-            <Link href='/dashboard' className='text-5xl text-blue-500 hover:underline'>
+            <Link
+                href='/dashboard'
+                className='text-5xl text-blue-500 hover:underline'
+            >
                 Go to Dashboard
             </Link>
         </div>
