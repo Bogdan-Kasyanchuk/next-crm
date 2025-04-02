@@ -12,6 +12,7 @@ const compat = new FlatCompat({
 const eslintConfig = [
     ...compat.config({
         extends: ['next/core-web-vitals', 'next/typescript'],
+        parser: '@typescript-eslint/parser',
         rules: {
             'import/order': [
                 'error',
@@ -55,12 +56,10 @@ const eslintConfig = [
                 }
             ],
             'react/jsx-props-no-multi-spaces': ['error'],
-            // 'react/jsx-first-prop-new-line': [
-            //     'error',
-            //     {
-            //         'when': 'always'
-            //     }
-            // ],
+            'react/jsx-first-prop-new-line': [
+                'error',
+                'multiline'
+            ],
             'react/jsx-curly-newline': [
                 'error',
                 {
@@ -79,6 +78,13 @@ const eslintConfig = [
                     'location': 'tag-aligned'
                 }
             ],
+            // 'react/jsx-indent-props': [ 2, 4 ],
+            // 'react/jsx-indent': [
+            //     2, 4,
+            //      {
+            //         indentLogicalExpressions: true
+            //     }
+            //      ]
             // 'react/jsx-closing-tag-location': [
             //     'error',
             //     {

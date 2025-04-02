@@ -9,9 +9,9 @@ export default async function Categories() {
         <div className='grid h-full grid-cols-4 gap-3'>
             {
                 categories.map(
-                    (category, i) => (
+                    (category) => (
                         <StatisticCard
-                            key={i}
+                            key={category.label}
                             type={StatisticCardType.DARK}
                             statistic={category}
                         />

@@ -26,14 +26,15 @@ export default async function Promotions() {
                         (promotion, i) => (
                             <tr key={i}>
                                 <SummaryTableCell>
-                                    <Link href={`/companies/${promotion.company.id}`}
+                                    <Link
+                                        href={`/companies/${promotion.company.id}`}
                                         className='inline-block hover:opacity-75 hover:text-red-500'
                                     >
                                         <div className='flex items-center gap-2'>
                                             <Image
                                                 width={20}
                                                 height={20}
-                                                src={promotion.company.logo || '/images/costo.png'}
+                                                src={promotion.company.logo}
                                                 alt={promotion.company.title}
                                                 className='rounded-full'
                                             />

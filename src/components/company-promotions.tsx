@@ -8,17 +8,18 @@ type Props = {
 };
 
 export default async function CompanyPromotions(props: Props) {
-    const companyPromotions = await fetchCompanyPromotionsData(props.id);
+    const promotions = await fetchCompanyPromotionsData(props.id);
 
     return (
         <>
             {
-                companyPromotions.length > 0
+                promotions.length > 0
                     ? <div className="grid grid-cols-12 gap-5">
                         {
-                            companyPromotions.map(
-                                (promotion, index) => (
-                                    <div key={index}
+                            promotions.map(
+                                (promotion) => (
+                                    <div
+                                        key={promotion.id}
                                         className="col-span-4"
                                     >
                                         <Promotion promotion={promotion} />

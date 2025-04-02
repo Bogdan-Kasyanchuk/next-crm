@@ -32,11 +32,19 @@ export default function PromotionForm({ onSubmit }: PromotionFormProps) {
     };
 
     return (
-        <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+        <Formik
+            initialValues={initialValues}
+            onSubmit={handleSubmit}
+        >
             <Form className="flex flex-col gap-10">
                 <p className="mb-0.5 text-xl">Add new promotion</p>
                 <div className="flex flex-col gap-5">
-                    <InputField required label="Title" placeholder="Title" name="title" />
+                    <InputField
+                        required
+                        label="Title"
+                        placeholder="Title"
+                        name="title"
+                    />
                     <InputField
                         required
                         label="Description"
@@ -50,9 +58,16 @@ export default function PromotionForm({ onSubmit }: PromotionFormProps) {
                         placeholder="Discount"
                         name="discount"
                     />
-                    <LogoUploader square label="Image" placeholder="Upload photo" />
+                    <LogoUploader
+                        square
+                        label="Image"
+                        placeholder="Upload photo"
+                    />
                 </div>
-                <Button type="submit" disabled={false}>
+                <Button
+                    type="submit"
+                    disabled={false}
+                >
                     Add promotion
                 </Button>
             </Form>

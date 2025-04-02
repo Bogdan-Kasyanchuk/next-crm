@@ -11,7 +11,8 @@ export default function Promotion({ promotion }: PromotionProps) {
     return (
         <div className="rounded overflow-hidden	bg-gray-100">
             <div className="relative w-full h-[200px] bg-gray-300">
-                <Image fill
+                <Image
+                    fill
                     src={promotion.image}
                     alt="promotion avatar"
                 />

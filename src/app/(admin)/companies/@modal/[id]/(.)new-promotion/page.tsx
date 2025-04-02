@@ -15,9 +15,10 @@ export default function Page() {
                 () => { router.back(); }
             }
         >
-            <PromotionForm onSubmit={
-                () => { router.back(); }
-            }
+            <PromotionForm
+                onSubmit={
+                    () => { router.back(); }
+                }
             />
         </Modal>
     );

@@ -26,7 +26,10 @@ export default async function Sales() {
                         (item, i) => (
                             <tr key={i}>
                                 <SummaryTableCell>
-                                    <Link href={`/companies/${item.id}`} className='inline-block hover:opacity-75 hover:text-red-500'>
+                                    <Link
+                                        href={`/companies/${item.id}`}
+                                        className='inline-block hover:opacity-75 hover:text-red-500'
+                                    >
                                         <div className='flex items-center gap-2'>
                                             <Image
                                                 width={20}

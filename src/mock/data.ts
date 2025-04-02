@@ -72,7 +72,7 @@ export const promotionsData: PromotionsMapper = PROMOTIONS.map(
                 title: company.title,
                 logo: company.logo,
             }
-        }
+        };
     }
 );
 

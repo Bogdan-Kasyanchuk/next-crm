@@ -41,12 +41,18 @@ export default function CompanyForm({ onSubmit }: CompanyFormProps) {
     };
 
     return (
-        <Formik initialValues={initialValues} onSubmit={handleSubmit}>
+        <Formik
+            initialValues={initialValues}
+            onSubmit={handleSubmit}
+        >
             <Form className="flex flex-col gap-10">
                 <p className="mb-0.5 text-xl">Add new company</p>
                 <div className="flex gap-6">
                     <div className="flex flex-col flex-1 gap-5">
-                        <LogoUploader label="Logo" placeholder="Upload photo" />
+                        <LogoUploader
+                            label="Logo"
+                            placeholder="Upload photo"
+                        />
                         <InputField
                             required
                             label="Status"
@@ -55,13 +61,18 @@ export default function CompanyForm({ onSubmit }: CompanyFormProps) {
                             as="select"
                             className="capitalize"
                         >
-                            {(Object.values(CompanyStatusType) as CompanyStatusType[]).map(
-                                (status) => (
-                                    <option key={status} value={status}>
-                                        {status}
-                                    </option>
-                                ),
-                            )}
+                            {
+                                (Object.values(CompanyStatusType) as CompanyStatusType[]).map(
+                                    (status) => (
+                                        <option
+                                            key={status}
+                                            value={status}
+                                        >
+                                            {status}
+                                        </option>
+                                    ),
+                                )
+                            }
                         </InputField>
 
                         <InputField
@@ -71,15 +82,25 @@ export default function CompanyForm({ onSubmit }: CompanyFormProps) {
                             name="countryId"
                             as="select"
                         >
-                            {countriesData.map((country, index) => (
-                                <option key={index} value={country.title}>
-                                    {country.title}
-                                </option>
-                            ))}
+                            {
+                                countriesData.map((country, index) => (
+                                    <option
+                                        key={index}
+                                        value={country.title}
+                                    >
+                                        {country.title}
+                                    </option>
+                                ))
+                            }
                         </InputField>
                     </div>
                     <div className="flex flex-col flex-1 gap-5">
-                        <InputField required label="Name" placeholder="Name" name="title" />
+                        <InputField
+                            required
+                            label="Name"
+                            placeholder="Name"
+                            name="title"
+                        />
                         <InputField
                             required
                             label="Category"
@@ -87,11 +108,16 @@ export default function CompanyForm({ onSubmit }: CompanyFormProps) {
                             name="categoryId"
                             as="select"
                         >
-                            {categoriesData.map((category, index) => (
-                                <option key={index} value={category.label}>
-                                    {category.label}
-                                </option>
-                            ))}
+                            {
+                                categoriesData.map((category, index) => (
+                                    <option
+                                        key={index}
+                                        value={category.label}
+                                    >
+                                        {category.label}
+                                    </option>
+                                ))
+                            }
                         </InputField>
                         <InputField
                             required
@@ -107,7 +133,10 @@ export default function CompanyForm({ onSubmit }: CompanyFormProps) {
                         />
                     </div>
                 </div>
-                <Button type="submit" disabled={false}>
+                <Button
+                    type="submit"
+                    disabled={false}
+                >
                     Add company
                 </Button>
             </Form>

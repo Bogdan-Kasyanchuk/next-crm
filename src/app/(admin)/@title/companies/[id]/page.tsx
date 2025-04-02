@@ -12,5 +12,7 @@ export default async function Page(props: Props) {
         return null;
     }
 
-    return <Title>{company.title}</Title>;
+    return (
+        <Title>{company.title}</Title>
+    );
 }

@@ -12,14 +12,19 @@ export default function InputField(props: InputFieldProps) {
 
     return (
         <div className="flex flex-col">
-            {label && (
-                <label htmlFor={id} className="mb-2 text-base color-gray-900">
-                    {label}
-                </label>
-            )}
+            {
+                label && (
+                    <label
+                        htmlFor={id}
+                        className="mb-2 text-base color-gray-900"
+                    >
+                        {label}
+                    </label>
+                )
+            }
             <Field
                 id={id}
-                className={clsx("p-3 h-11 text-sm rounded border border-gray-300 shadow", className)}
+                className={clsx('p-3 h-11 text-sm rounded border border-gray-300 shadow', className)}
                 {...rest}
             />
         </div>

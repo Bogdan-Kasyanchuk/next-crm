@@ -9,11 +9,13 @@ export default async function Companies() {
         <CompanyTable>
             {
                 companies.map(
-                    (company, i) => (
-                        <CompanyRow key={i}
+                    (company) => (
+                        <CompanyRow
+                            key={company.id}
                             company={company}
                         />
-                    ))
+                    )
+                )
             }
         </CompanyTable>
     );
