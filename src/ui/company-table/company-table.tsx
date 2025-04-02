@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { ReactNode } from 'react';
 
-const headers = ['Category', 'Company', 'Status', 'Promotion', 'Country', 'Joined date'];
+const headers = ['Category', 'Company', 'Status', 'Promotion', 'Country', 'Joined date', ''];
 
 type Props = {
     children: ReactNode;

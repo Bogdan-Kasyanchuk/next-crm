@@ -17,7 +17,7 @@ export default function SearchInput(props: SearchInputProps) {
             />
             <button
                 type="button"
-                className="absolute top-0	right-0 p-3"
+                className="absolute top-0 right-0 p-3"
                 onClick={onSearchClick}
             >
                 <Image

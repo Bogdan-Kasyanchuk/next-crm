@@ -148,7 +148,9 @@ export async function fetchPromotions() {
 
 export async function fetchCompanies() {
     try {
-        const data = await fetch(`${process.env.API_HOST}/companies`);
+        const data = await fetch(`${process.env.API_HOST}/companies`, {
+            next: { tags: ['companies'] }
+        });
         const companies: CompanyShema[] = await data.json();
 
         const transformedCompanies = companies.map<CompanyMapper>(
@@ -219,5 +221,22 @@ export async function fetchCompanyPromotions(id: string) {
     } catch (error) {
         console.error('Error:', error);
         throw new Error('Failed to fetch the promotions.');
+    }
+}
+
+export async function deleteCompanyById(id: string) {
+    try {
+        const data = await fetch(`${process.env.API_HOST}/companies/${id}`, {
+            method: 'DELETE',
+        });
+
+        if (data.ok) {
+            const company: CompanyShema = await data.json();
+
+            console.log(`The company ${company.title} has been successfully deleted.`);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error('Failed to fetch the company.');
     }
 }

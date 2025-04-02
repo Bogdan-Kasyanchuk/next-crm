@@ -1,11 +1,15 @@
+'use client';
+
 import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 
 import { CompanyStatusType } from '@/enums';
+import { deleteCompany } from '@/lib/actions';
 import { CompanyMapper } from '@/types';
 
+import Button from '../button';
 import StatusLabel from '../status-label';
 
 type Props = {
@@ -13,6 +17,7 @@ type Props = {
 };
 
 export default function CompanyRow(props: Props) {
+
     return (
         <tr className='text-center text-sm text-gray-900 bg-white h-13'>
             <td
@@ -28,7 +33,7 @@ export default function CompanyRow(props: Props) {
             >
                 {props.company.category}
             </td>
-            <td className='min-w-[230px] pl-5 text-start'>
+            <td className='min-w-[200px] pl-5 text-start'>
                 <Link
                     href={`/companies/${props.company.id}`}
                     className='inline-block hover:opacity-75 hover:text-red-500'
@@ -70,6 +75,17 @@ export default function CompanyRow(props: Props) {
             <td className='min-w-[120px]'>{props.company.country.title}</td>
             <td className='rounded-r min-w-[130px]'>
                 {new Date(props.company.joinedAt).toLocaleDateString('uk-UA')}
+            </td>
+            <td className='w-[100px]'>
+                <Button
+                    onClick={
+                        () => {
+                            deleteCompany(props.company.id);
+                        }
+                    }
+                >
+                    Delete
+                </Button>
             </td>
         </tr>
     );
