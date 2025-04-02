@@ -52,8 +52,8 @@ export type SalesMapper = Array<{
     id: string;
     title: string;
     logo: string;
-    sold: number;
-    income: number;
+    sold: string;
+    income: string;
 }>;
 
 export type PromotionsMapper = Array<{

@@ -123,7 +123,7 @@
         "companyId": "com-05",
         "title": "Handmade Granite Computer",
         "image": "https://picsum.photos/seed/RhvSg5/3269/2163?grayscale&blur=6",
-        "discount": "290.49",
+        "discount": "20",
         "description": "Claro vinum crustulum vox aro odit illum.",
         "id": "16"
     },
@@ -667,7 +667,7 @@
         "companyId": "com-45",
         "title": "Generic Wooden Bike",
         "image": "https://picsum.photos/seed/WCww3ppv8/3248/2325?grayscale&blur=7",
-        "discount": "478.24",
+        "discount": "24",
         "description": "Strues vesica fugiat adnuo harum cultellus torqueo vesica adimpleo.",
         "id": "84"
     },

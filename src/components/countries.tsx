@@ -1,11 +1,11 @@
 import clsx from 'clsx';
 import Image from 'next/image';
 
-import { fetchCountriesData } from '@/lib/data';
+import { fetchCountries } from '@/lib/data';
 import DashboardCard from '@/ui/dashboard-card';
 
 export default async function Countries() {
-    const countries = await fetchCountriesData();
+    const countries = await fetchCountries();
 
     return (
 

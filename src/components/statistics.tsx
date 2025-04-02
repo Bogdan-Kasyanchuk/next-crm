@@ -1,9 +1,9 @@
 import { StatisticCardType } from '@/enums';
-import { fetchStatisticsData } from '@/lib/data';
+import { fetchStatistics } from '@/lib/data';
 import StatisticCard from '@/ui/statistic-card/statistic-card';
 
 export default async function Statistics() {
-    const statistics = await fetchStatisticsData();
+    const statistics = await fetchStatistics();
 
     return (
         <div className='grid grid-cols-2 gap-5 xl:grid-cols-4'>

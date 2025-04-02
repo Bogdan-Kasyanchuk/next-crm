@@ -1,14 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { fetchSalesData } from '@/lib/data';
+import { fetchSales } from '@/lib/data';
 import DashboardCard from '@/ui/dashboard-card';
 import SummaryTable from '@/ui/summary-table/summary-table';
 import SummaryTableCell from '@/ui/summary-table/summary-table-cell';
 import SummaryTableHeader from '@/ui/summary-table/summary-table-header';
 
 export default async function Sales() {
-    const sales = await fetchSalesData();
+    const sales = await fetchSales();
 
     return (
         <DashboardCard label='Sales details'>
@@ -36,7 +36,7 @@ export default async function Sales() {
                                                 height={20}
                                                 src={item.logo}
                                                 alt={item.title}
-                                                className='rounded-full'
+                                                className='rounded-full w-5 h-5'
                                             />
                                             {item.title}
                                         </div>

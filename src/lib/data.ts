@@ -1,68 +1,152 @@
-import {
-    categoriesData,
-    statisticsData,
-    salesData,
-    promotionsData,
-    countriesData,
-} from '@/mock/data';
-import { CompanyMapper, CompanyShema, PromotionMapper } from '@/types';
+import { CompanyMapper, CompanyShema, CountriesMapper, PromotionMapper, PromotionsMapper, SalesMapper, StatisticsMapper } from '@/types';
 
-export async function fetchStatisticsData() {
+export async function fetchStatistics() {
     try {
-        await new Promise((resolve) => setTimeout(resolve, 750));
+        const dataPromotions = await fetch(`${process.env.API_HOST}/promotions`);
+        const promotions: PromotionMapper[] = await dataPromotions.json();
 
-        return statisticsData;
+        const dataCompanies = await fetch(`${process.env.API_HOST}/companies`);
+        const companies: CompanyShema[] = await dataCompanies.json();
+
+        const statistics: StatisticsMapper = [
+            {
+                label: 'Total promotions',
+                value: promotions.length,
+            },
+            {
+                label: 'Total categories',
+                value: companies.reduce(
+                    (acc, company) => {
+                        if (acc.includes(company.category)) {
+                            return acc;
+                        }
+                        return [...acc, company.category];
+
+                    }, [] as string[]
+                ).length
+            },
+            {
+                label: 'New companies',
+                value: companies.filter((company) => new Date(company.joinedAt).getFullYear() > 1999).length
+            },
+            {
+                label: 'Total active companies',
+                value: companies.filter((company) => company.status === 'active').length,
+            },
+        ];
+
+        return statistics;
     } catch (error) {
         console.error('Error:', error);
-        throw new Error('Failed to fetch data.');
+        throw new Error('Failed to fetch the statistics.');
     }
 }
 
-export async function fetchSalesData() {
+export async function fetchSales() {
     try {
-        await new Promise((resolve) => setTimeout(resolve, 1750));
+        const data = await fetch(`${process.env.API_HOST}/companies`);
+        const companies: CompanyShema[] = await data.json();
 
-        return salesData;
+        const sales: SalesMapper = companies.slice(0, 10).map(
+            (company) => ({
+                id: company.id,
+                title: company.title,
+                logo: company.logo,
+                sold: company.sold,
+                income: company.income,
+            })
+        );
+
+        return sales;
     } catch (error) {
         console.error('Error:', error);
-        throw new Error('Failed to fetch data.');
+        throw new Error('Failed to fetch the sales.');
     }
 }
 
-export async function fetchCategoriesData() {
+export async function fetchCategories() {
     try {
-        await new Promise((resolve) => setTimeout(resolve, 500));
+        const data = await fetch(`${process.env.API_HOST}/companies`);
+        const companies: CompanyShema[] = await data.json();
 
-        return categoriesData;
+        const categories: StatisticsMapper = companies.reduce(
+            (acc, company) => {
+                if (acc.includes(company.category)) {
+                    return acc;
+                }
+                return [...acc, company.category];
+
+            }, [] as string[]
+        ).map((category) => ({
+            label: category,
+            value: companies.filter((company) => company.category === category).length,
+        }));
+
+        return categories;
     } catch (error) {
         console.error('Error:', error);
-        throw new Error('Failed to fetch data.');
+        throw new Error('Failed to fetch the categories.');
     }
 }
 
-export async function fetchCountriesData() {
+export async function fetchCountries() {
     try {
-        await new Promise((resolve) => setTimeout(resolve, 1500));
+        const data = await fetch(`${process.env.API_HOST}/companies`);
+        const companies: CompanyShema[] = await data.json();
 
-        return countriesData;
+        const countries: CountriesMapper = companies.reduce(
+            (acc, company) => {
+                if (acc.includes(company.country.code)) {
+                    return acc;
+                }
+                return [...acc, company.country.code];
+
+            }, [] as string[]
+        ).map((code) => ({
+            title: companies.find((company) => company.country.code === code)!.country.title,
+            code: code,
+            countCompanies: companies.filter((company) => company.country.code === code).length,
+        }));
+
+        return countries;
     } catch (error) {
         console.error('Error:', error);
-        throw new Error('Failed to fetch data.');
+        throw new Error('Failed to fetch the countries.');
     }
 }
 
-export async function fetchPromotionsData() {
+export async function fetchPromotions() {
     try {
-        await new Promise((resolve) => setTimeout(resolve, 1250));
+        const dataPromotions = await fetch(`${process.env.API_HOST}/promotions`);
+        const promotions: PromotionMapper[] = await dataPromotions.json();
 
-        return promotionsData;
+        const dataCompanies = await fetch(`${process.env.API_HOST}/companies`);
+        const companies: CompanyShema[] = await dataCompanies.json();
+
+        const transformedPromotions: PromotionsMapper = promotions.slice(0, 20).map(
+            (promotion) => {
+                const company = companies.find((company) => company.id === promotion.companyId)!;
+
+                return {
+                    title: promotion.title,
+                    discount: promotion.discount,
+                    company: {
+                        id: company.id,
+                        title: company.title,
+                        logo: company.logo,
+                    }
+                };
+            }
+        );
+
+        return transformedPromotions;
     } catch (error) {
         console.error('Error:', error);
-        throw new Error('Failed to fetch data.');
+        throw new Error('Failed to fetch the promotions.');
     }
 }
 
-export async function fetchCompaniesData() {
+export async function fetchCompanies() {
     try {
         const data = await fetch(`${process.env.API_HOST}/companies`);
         const companies: CompanyShema[] = await data.json();
@@ -90,9 +174,14 @@ export async function fetchCompaniesData() {
     }
 }
 
-export async function fetchCompanyData(id: string) {
+export async function fetchCompany(id: string) {
     try {
         const data = await fetch(`${process.env.API_HOST}/companies/${id}`);
+
+        if (!data.ok) {
+            return undefined;
+        }
+
         const company: CompanyShema = await data.json();
 
         const transformedCompany: CompanyMapper = {
@@ -116,11 +205,11 @@ export async function fetchCompanyData(id: string) {
     }
 }
 
-export async function fetchCompanyPromotionsData(id: string) {
+export async function fetchCompanyPromotions(id: string) {
     try {
         const data = await fetch(`${process.env.API_HOST}/companies/${id}/promotions`);
 
-        if (data.status === 404) {
+        if (!data.ok) {
             return [];
         }
 

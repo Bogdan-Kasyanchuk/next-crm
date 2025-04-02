@@ -9,7 +9,7 @@ type CompanyProps = {
 
 export default function Company(props: CompanyProps) {
     return (
-        <div className="flex flex-col gap-5 sticky top-0">
+        <div className="flex flex-col gap-5 sticky top-[64px]">
             <div className="flex flex-col items-center p-7 gap-5 bg-gray-900 rounded">
                 <div className="w-20 h-20 rounded-full bg-blue-500">
                     <Image

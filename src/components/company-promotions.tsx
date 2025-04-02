@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { fetchCompanyPromotionsData } from '@/lib/data';
+import { fetchCompanyPromotions } from '@/lib/data';
 import Promotion from '@/ui/promotion';
 
 type Props = {
@@ -8,7 +8,7 @@ type Props = {
 };
 
 export default async function CompanyPromotions(props: Props) {
-    const promotions = await fetchCompanyPromotionsData(props.id);
+    const promotions = await fetchCompanyPromotions(props.id);
 
     return (
         <>

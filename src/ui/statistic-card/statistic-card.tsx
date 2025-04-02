@@ -35,7 +35,13 @@ export default function StatisticCard(props: Props) {
             >
                 {props.statistic.label}
             </p>
-            <p className='text-6xl font-semibold'>{props.statistic.value}</p>
+            <p
+                className={
+                    clsx('text-6xl font-semibold', props.type === StatisticCardType.GRADIENT && 'pl-6',)
+                }
+            >
+                {props.statistic.value}
+            </p>
         </div>
     );
 }

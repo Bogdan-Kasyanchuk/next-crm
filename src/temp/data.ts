@@ -1,7 +1,7 @@
 import { CompanyMapper, CountriesMapper, PromotionMapper, PromotionsMapper, SalesMapper, StatisticsMapper } from '@/types';
 
 import { COMPANIES, PROMOTIONS } from './db';
-import { randomNumberMax, randomNumberMinMax } from './randomNumber';
+import { randomNumberMax, randomNumberMinMax } from '../mock/randomNumber';
 
 //Dashboard
 export const statisticsData: StatisticsMapper = [
@@ -28,8 +28,8 @@ export const salesData: SalesMapper = COMPANIES.slice(0, 8).map(
         id: company.id,
         title: company.title,
         logo: company.logo,
-        sold: randomNumberMax(),
-        income: randomNumberMax(9999),
+        sold: randomNumberMax().toString(),
+        income: randomNumberMax(9999).toString(),
     })
 );
 

@@ -3,7 +3,7 @@
 import { Form, Formik } from 'formik';
 
 import { CompanyStatusType } from '@/enums';
-import { categoriesData, countriesData } from '@/mock/data';
+import { categoriesData, countriesData } from '@/temp/data';
 
 import Button from './button';
 import InputField from './input-field';

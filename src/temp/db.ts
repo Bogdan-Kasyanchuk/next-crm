@@ -1,7 +1,6 @@
 import { CompanyStatusType } from '@/enums';
-
-import { randomImage } from './randomImage';
-import { randomNumberMax } from './randomNumber';
+import { randomImage } from '@/mock/randomImage';
+import { randomNumberMax } from '@/mock/randomNumber';
 
 export const COMPANIES = [
     {

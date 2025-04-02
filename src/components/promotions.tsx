@@ -1,14 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { fetchPromotionsData } from '@/lib/data';
+import { fetchPromotions } from '@/lib/data';
 import DashboardCard from '@/ui/dashboard-card';
 import SummaryTable from '@/ui/summary-table/summary-table';
 import SummaryTableCell from '@/ui/summary-table/summary-table-cell';
 import SummaryTableHeader from '@/ui/summary-table/summary-table-header';
 
 export default async function Promotions() {
-    const promotions = await fetchPromotionsData();
+    const promotions = await fetchPromotions();
 
     return (
         <DashboardCard label='Promotions'>
@@ -36,7 +36,7 @@ export default async function Promotions() {
                                                 height={20}
                                                 src={promotion.company.logo}
                                                 alt={promotion.company.title}
-                                                className='rounded-full'
+                                                className='rounded-full w-5 h-5'
                                             />
                                             {promotion.company.title}
                                         </div>

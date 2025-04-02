@@ -6,9 +6,9 @@ import {
     countriesData,
     companiesData,
     companyPromotionsData,
-} from '@/mock/data';
+} from '@/temp/data';
 
-export async function fetchStatisticsData() {
+export async function fetchStatistics() {
     try {
         await new Promise((resolve) => setTimeout(resolve, 750));
 
@@ -19,7 +19,7 @@ export async function fetchStatisticsData() {
     }
 }
 
-export async function fetchSalesData() {
+export async function fetchSales() {
     try {
         await new Promise((resolve) => setTimeout(resolve, 1750));
 
@@ -30,7 +30,7 @@ export async function fetchSalesData() {
     }
 }
 
-export async function fetchCategoriesData() {
+export async function fetchCategories() {
     try {
         await new Promise((resolve) => setTimeout(resolve, 500));
 
@@ -41,7 +41,7 @@ export async function fetchCategoriesData() {
     }
 }
 
-export async function fetchCountriesData() {
+export async function fetchCountries() {
     try {
         await new Promise((resolve) => setTimeout(resolve, 1500));
 
@@ -52,7 +52,7 @@ export async function fetchCountriesData() {
     }
 }
 
-export async function fetchPromotionsData() {
+export async function fetchPromotions() {
     try {
         await new Promise((resolve) => setTimeout(resolve, 1250));
 
@@ -63,7 +63,7 @@ export async function fetchPromotionsData() {
     }
 }
 
-export async function fetchCompaniesData() {
+export async function fetchCompanies() {
     try {
         await new Promise((resolve) => setTimeout(resolve, 1000));
 
@@ -74,7 +74,7 @@ export async function fetchCompaniesData() {
     }
 }
 
-export async function fetchCompanyData(id: string) {
+export async function fetchCompany(id: string) {
     const companyData = companiesData.find((company) => company.id === id);
 
     try {
@@ -87,7 +87,7 @@ export async function fetchCompanyData(id: string) {
     }
 }
 
-export async function fetchCompanyPromotionsData(id: string) {
+export async function fetchCompanyPromotions(id: string) {
     const promotionsData = companyPromotionsData.filter(
         (promotion) => promotion.companyId === id);
 
