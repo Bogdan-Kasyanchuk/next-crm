@@ -3,7 +3,7 @@ import Companies from '@/components/companies';
 import SearchInput from '@/ui/search-input';
 import Toolbar from '@/ui/toolbar';
 
-export default async function Page() {
+export default function Page() {
     return (
         <div className='l-page__content'>
             <Toolbar action={<AddCompanyButton />}>

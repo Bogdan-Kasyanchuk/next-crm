@@ -7,7 +7,7 @@ import Sales from '@/components/sales';
 import Statistics from '@/components/statistics';
 import Loader from '@/ui/loader/loader';
 
-export default async function Page() {
+export default function Page() {
     return (
         <div className='l-page__content'>
             <div className='col-span-12 h-[292px] xl:h-[136px]'>

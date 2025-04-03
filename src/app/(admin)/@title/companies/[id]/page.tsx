@@ -1,5 +1,4 @@
 import { fetchCompany } from '@/lib/data';
-import Title from '@/ui/title';
 
 type Props = {
     params: Promise<{ id: string }>
@@ -15,6 +14,6 @@ export default async function Page(props: Props) {
     }
 
     return (
-        <Title>{company.title}</Title>
+        <>{company.title}</>
     );
 }

@@ -4,6 +4,10 @@ import PromotionForm from '@/ui/promotion-form';
 
 export default function Page() {
     return (
-        <PromotionForm />
+        <div className='l-page__content'>
+            <div className='col-span-12'>
+                <PromotionForm />
+            </div>
+        </div>
     );
 }

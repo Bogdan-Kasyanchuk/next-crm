@@ -76,15 +76,21 @@ export default function CompanyRow(props: Props) {
             <td className='rounded-r min-w-[130px]'>
                 {new Date(props.company.joinedAt).toLocaleDateString('uk-UA')}
             </td>
-            <td className='w-[100px]'>
+            <td className='w-[38px]'>
                 <Button
+                    className='!px-2.5'
                     onClick={
                         () => {
                             deleteCompany(props.company.id);
                         }
                     }
                 >
-                    Delete
+                    <Image
+                        width={18}
+                        height={18}
+                        src='/icons/trash.svg'
+                        alt='Delete'
+                    />
                 </Button>
             </td>
         </tr>

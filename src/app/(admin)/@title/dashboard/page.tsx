@@ -1,7 +1,5 @@
-import Title from '@/ui/title';
-
-export default async function Page() {
+export default function Page() {
     return (
-        <Title>Dashboard</Title>
+        <>Dashboard</>
     );
 }

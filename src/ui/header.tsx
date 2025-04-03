@@ -10,7 +10,7 @@ type Props = {
 export default function Header(props: Props) {
     return (
         <header className='flex items-center gap-5 px-[30px] py-5 border-b border-gray-300'>
-            {props.children}
+            <div className='grow text-3xl font-bold'>{props.children}</div>
             <div className='self-stretch w-px bg-gray-300 ml-auto' />
             <div className='flex items-center gap-2.5'>
                 <Image
