@@ -209,7 +209,11 @@ export async function fetchCompany(id: string) {
 
 export async function fetchCompanyPromotions(id: string) {
     try {
-        const data = await fetch(`${process.env.API_HOST}/companies/${id}/promotions`);
+        const data = await fetch(`${process.env.API_HOST}/companies/${id}/promotions`,
+            {
+                next: { tags: ['promotions'] }
+            }
+        );
 
         if (!data.ok) {
             return [];
@@ -234,6 +238,26 @@ export async function deleteCompanyById(id: string) {
             const company: CompanyShema = await data.json();
 
             console.log(`The company ${company.title} has been successfully deleted.`);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error('Failed to fetch the company.');
+    }
+}
+
+export async function deletePromotionById(companyId: string, id: string) {
+    try {
+        const data = await fetch(
+            `${process.env.API_HOST}/companies/${companyId}/promotions/${id}`,
+            {
+                method: 'DELETE',
+            }
+        );
+
+        if (data.ok) {
+            const promotion: PromotionMapper = await data.json();
+
+            console.log(`The promotion ${promotion.title} has been successfully deleted.`);
         }
     } catch (error) {
         console.error('Error:', error);

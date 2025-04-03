@@ -3,13 +3,16 @@ import React from 'react';
 
 import { PromotionMapper } from '@/types';
 
+import Button from './button';
+import DeletePromotionButton from './delete-promotion-button';
+
 type PromotionProps = {
     promotion: PromotionMapper;
 }
 
 export default function Promotion({ promotion }: PromotionProps) {
     return (
-        <div className="rounded overflow-hidden	bg-gray-100">
+        <div className="rounded overflow-hidden	bg-gray-100 relative">
             <div className="relative w-full h-[200px] bg-gray-300">
                 <Image
                     fill
@@ -26,6 +29,20 @@ export default function Promotion({ promotion }: PromotionProps) {
                     {promotion.title}
                 </p>
                 <p className="text-sm text-gray-900">{promotion.description}</p>
+            </div>
+            <div className='absolute top-0 right-0 inline-flex items-center gap-x-2.5'>
+                <DeletePromotionButton
+                    companyId={promotion.companyId}
+                    id={promotion.id}
+                />
+                <Button className='!p-1.5'>
+                    <Image
+                        width={18}
+                        height={18}
+                        src='/icons/pencil.svg'
+                        alt='Edit'
+                    />
+                </Button>
             </div>
         </div>
     );

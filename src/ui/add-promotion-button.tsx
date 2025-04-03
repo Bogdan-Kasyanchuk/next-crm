@@ -5,18 +5,22 @@ import React from 'react';
 
 import Button from '@/ui/button';
 
-export default function AddCompanyButton() {
+type AddPromotionButtonProps = {
+    id: string
+};
+
+export default function AddPromotionButton(props: AddPromotionButtonProps) {
     const router = useRouter();
 
     return (
         <Button
             onClick={
                 () => {
-                    router.push('/companies/new', { scroll: false });
+                    router.push(`/companies/${props.id}/promotion-new`, { scroll: false });
                 }
             }
         >
-            Add company
+            Add promotion
         </Button>
     );
 }
