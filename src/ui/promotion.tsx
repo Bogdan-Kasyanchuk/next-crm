@@ -1,10 +1,11 @@
 import Image from 'next/image';
 import React from 'react';
 
+import { deletePromotion } from '@/lib/actions';
 import { PromotionMapper } from '@/types';
 
 import Button from './button';
-import DeletePromotionButton from './delete-promotion-button';
+import DeleteButton from './delete-button';
 
 type PromotionProps = {
     promotion: PromotionMapper;
@@ -17,7 +18,7 @@ export default function Promotion({ promotion }: PromotionProps) {
                 <Image
                     fill
                     src={promotion.image}
-                    alt="promotion avatar"
+                    alt={promotion.title}
                 />
                 <div className="w-14 h-14 absolute top-0 left-px rounded-br-full bg-lime-200" />
                 <div className="w-14 h-14 absolute inset-0 py-3 pr-3 pl-0.5 rounded-br-full bg-gray-900">
@@ -31,10 +32,23 @@ export default function Promotion({ promotion }: PromotionProps) {
                 <p className="text-sm text-gray-900">{promotion.description}</p>
             </div>
             <div className='absolute top-0 right-0 inline-flex items-center gap-x-2.5'>
-                <DeletePromotionButton
-                    companyId={promotion.companyId}
-                    id={promotion.id}
-                />
+                <DeleteButton
+                    className='!p-1.5'
+                    actionProps={
+                        {
+                            companyId: promotion.companyId,
+                            id: promotion.id
+                        }
+                    }
+                    action={deletePromotion}
+                >
+                    <Image
+                        width={18}
+                        height={18}
+                        src='/icons/trash.svg'
+                        alt='Delete'
+                    />
+                </DeleteButton>
                 <Button className='!p-1.5'>
                     <Image
                         width={18}

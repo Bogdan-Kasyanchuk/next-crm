@@ -1,145 +1,118 @@
-'use client';
-
-import { Form, Formik } from 'formik';
+import Image from 'next/image';
 
 import { CompanyStatusType } from '@/enums';
-import { categoriesData, countriesData } from '@/temp/data';
+import { createCompany } from '@/lib/actions';
+import { categories, countries, Country } from '@/mock/data';
+import { randomImage } from '@/mock/randomImage';
 
-import Button from './button';
 import InputField from './input-field';
-import LogoUploader from './logo-uploader';
+import SelectField from './select-field';
+import SubmitButton from './submit-button';
 
-export type CompanyFieldValues = {
-    title: string;
-    description: string;
-    status: CompanyStatusType;
-    joinedDate: string;
-    categoryId: string;
-    countryId: string;
-};
-
-const initialValues: CompanyFieldValues = {
-    title: '',
-    description: '',
-    status: CompanyStatusType.ACTIVE,
-    joinedDate: '',
-    categoryId: '',
-    countryId: '',
-};
-
-type CompanyFormProps = {
-    onSubmit?: (values: CompanyFieldValues) => void | Promise<void>;
-}
-
-export default function CompanyForm({ onSubmit }: CompanyFormProps) {
-
-    const handleSubmit = (values: CompanyFieldValues) => {
-
-        if (onSubmit) {
-            onSubmit(values);
-        }
-    };
+export default function CompanyForm() {
 
     return (
-        <Formik
-            initialValues={initialValues}
-            onSubmit={handleSubmit}
+        <form
+            action={createCompany}
+            className="flex flex-col gap-10"
         >
-            <Form className="flex flex-col gap-10">
-                <p className="mb-0.5 text-xl">Add new company</p>
-                <div className="flex gap-6">
-                    <div className="flex flex-col flex-1 gap-5">
-                        <LogoUploader
-                            label="Logo"
-                            placeholder="Upload photo"
-                        />
-                        <InputField
-                            required
-                            label="Status"
-                            placeholder="Status"
-                            name="status"
-                            as="select"
-                            className="capitalize"
-                        >
-                            {
-                                (Object.values(CompanyStatusType) as CompanyStatusType[]).map(
-                                    (status) => (
-                                        <option
-                                            key={status}
-                                            value={status}
-                                        >
-                                            {status}
-                                        </option>
-                                    ),
+            <p className="mb-0.5 text-xl">Add new company</p>
+            <div className="flex gap-6">
+                <div className="flex flex-col flex-1 gap-5">
+                    <Image
+                        className="rounded-full w-[160px] h-[160px] mx-auto"
+                        width={160}
+                        height={160}
+                        src={randomImage(200, 200)}
+                        alt="Image"
+                    />
+                    <input
+                        type="text"
+                        name="logo"
+                        value={randomImage(200, 200)}
+                        className="hidden"
+                    />
+                    <SelectField
+                        required
+                        label="Status"
+                        name="status"
+                        className="capitalize"
+                    >
+                        {
+                            (Object.values(CompanyStatusType) as CompanyStatusType[]).map(
+                                (status) => (
+                                    <option
+                                        key={status}
+                                        value={status}
+                                    >
+                                        {status}
+                                    </option>
                                 )
-                            }
-                        </InputField>
+                            )
+                        }
+                    </SelectField>
 
-                        <InputField
-                            required
-                            label="Country"
-                            placeholder="Country"
-                            name="countryId"
-                            as="select"
-                        >
-                            {
-                                countriesData.map((country, index) => (
+                    <SelectField
+                        required
+                        label="Country"
+                        name="countryCode"
+                    >
+                        {
+                            (Object.keys(countries) as Country[]).map(
+                                (code) => (
                                     <option
-                                        key={index}
-                                        value={country.title}
+                                        key={code}
+                                        value={code}
                                     >
-                                        {country.title}
+                                        {countries[code]}
                                     </option>
-                                ))
-                            }
-                        </InputField>
-                    </div>
-                    <div className="flex flex-col flex-1 gap-5">
-                        <InputField
-                            required
-                            label="Name"
-                            placeholder="Name"
-                            name="title"
-                        />
-                        <InputField
-                            required
-                            label="Category"
-                            placeholder="Category"
-                            name="categoryId"
-                            as="select"
-                        >
-                            {
-                                categoriesData.map((category, index) => (
-                                    <option
-                                        key={index}
-                                        value={category.label}
-                                    >
-                                        {category.label}
-                                    </option>
-                                ))
-                            }
-                        </InputField>
-                        <InputField
-                            required
-                            label="Joined date"
-                            type="date"
-                            name="joinedDate"
-                        />
-                        <InputField
-                            required
-                            label="Description"
-                            placeholder="Description"
-                            name="description"
-                        />
-                    </div>
+                                )
+                            )
+                        }
+                    </SelectField>
                 </div>
-                <Button
-                    type="submit"
-                    disabled={false}
-                >
-                    Add company
-                </Button>
-            </Form>
-        </Formik>
+
+                <div className="flex flex-col flex-1 gap-5">
+                    <InputField
+                        required
+                        label="Name"
+                        placeholder="Name"
+                        name="title"
+                    />
+                    <SelectField
+                        required
+                        label="Category"
+                        name="category"
+                    >
+                        {
+                            categories.map(
+                                (option) => (
+                                    <option
+                                        key={option}
+                                        value={option}
+                                    >
+                                        {option}
+                                    </option>
+                                ))
+                        }
+                    </SelectField>
+                    <InputField
+                        required
+                        label="Joined date"
+                        type="date"
+                        name="joinedAt"
+                    />
+                    <InputField
+                        required
+                        label="Description"
+                        placeholder="Description"
+                        name="description"
+                    />
+                </div>
+            </div>
+            <SubmitButton >
+                Add company
+            </SubmitButton>
+        </form>
     );
 }

@@ -228,6 +228,25 @@ export async function fetchCompanyPromotions(id: string) {
     }
 }
 
+export async function createCompanyById(newCompany: CompanyShema) {
+    try {
+        const data = await fetch(`${process.env.API_HOST}/companies`, {
+            method: 'POST',
+            headers: {'content-type':'application/json'},
+            body: JSON.stringify(newCompany)
+          });
+
+        if (data.ok) {
+            const company: CompanyShema = await data.json();
+
+            console.log(`The company ${company.title} has been successfully added.`);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error('Failed to fetch the company.');
+    }
+}
+
 export async function deleteCompanyById(id: string) {
     try {
         const data = await fetch(`${process.env.API_HOST}/companies/${id}`, {

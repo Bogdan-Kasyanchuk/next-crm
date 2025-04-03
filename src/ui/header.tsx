@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { ReactNode } from 'react';
 
-import { user } from '@/mock/user';
+import { user } from '@/mock/data';
 
 type Props = {
     children: ReactNode;

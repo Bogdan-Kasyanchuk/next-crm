@@ -3,10 +3,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { CompanyStatusType } from '@/enums';
+import { deleteCompany } from '@/lib/actions';
 import { CompanyMapper } from '@/types';
 
 import Button from '../button';
-import DeleteCompanyButton from '../delete-company-button';
+import DeleteButton from '../delete-button';
 import StatusLabel from '../status-label';
 
 type Props = {
@@ -75,7 +76,18 @@ export default function CompanyRow(props: Props) {
             </td>
             <td className='w-[86px] min-w-[86px]'>
                 <div className='inline-flex items-center gap-x-2.5'>
-                    <DeleteCompanyButton id={props.company.id} />
+                    <DeleteButton
+                        className='!px-2.5'
+                        actionProps={{ id: props.company.id }}
+                        action={deleteCompany}
+                    >
+                        <Image
+                            width={18}
+                            height={18}
+                            src='/icons/trash.svg'
+                            alt='Delete'
+                        />
+                    </DeleteButton>
                     <Button className='!px-2.5'>
                         <Image
                             width={18}
