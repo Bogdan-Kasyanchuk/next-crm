@@ -21,9 +21,11 @@ export default function DeleteButton<T>(props: Props<T>) {
             disabled={isPending}
             onClick={
                 async () => {
-                    startTransition(async () => {
-                        await props.action(props.actionProps);
-                    });
+                    startTransition(
+                        async () => {
+                            await props.action(props.actionProps);
+                        }
+                    );
                 }
             }
         >

@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 import { CompanyStatusType } from '@/enums';
-import { deleteCompany } from '@/lib/actions';
+import { actionDeleteCompany } from '@/lib/actions';
 import { CompanyMapper } from '@/types';
 
 import Button from '../button';
@@ -79,7 +79,7 @@ export default function CompanyRow(props: Props) {
                     <DeleteButton
                         className='!px-2.5'
                         actionProps={{ id: props.company.id }}
-                        action={deleteCompany}
+                        action={actionDeleteCompany}
                     >
                         <Image
                             width={18}

@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 
-import { deletePromotion } from '@/lib/actions';
+import { actionDeletePromotion } from '@/lib/actions';
 import { PromotionMapper } from '@/types';
 
 import Button from './button';
@@ -33,14 +33,14 @@ export default function Promotion({ promotion }: PromotionProps) {
             </div>
             <div className='absolute top-0 right-0 inline-flex items-center gap-x-2.5'>
                 <DeleteButton
-                    className='!p-1.5'
+                    className='!p-2'
                     actionProps={
                         {
                             companyId: promotion.companyId,
                             id: promotion.id
                         }
                     }
-                    action={deletePromotion}
+                    action={actionDeletePromotion}
                 >
                     <Image
                         width={18}
@@ -49,7 +49,7 @@ export default function Promotion({ promotion }: PromotionProps) {
                         alt='Delete'
                     />
                 </DeleteButton>
-                <Button className='!p-1.5'>
+                <Button className='!p-2'>
                     <Image
                         width={18}
                         height={18}

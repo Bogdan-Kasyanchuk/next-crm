@@ -1,5 +1,5 @@
-import AddCompanyButton from '@/ui/add-company-button';
 import Companies from '@/components/companies';
+import AddCompanyButton from '@/ui/add-company-button';
 import SearchInput from '@/ui/search-input';
 import Toolbar from '@/ui/toolbar';
 

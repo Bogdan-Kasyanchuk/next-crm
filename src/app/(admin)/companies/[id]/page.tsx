@@ -1,9 +1,9 @@
 import { notFound } from 'next/navigation';
 import { Suspense } from 'react';
 
-import AddPromotionButton from '@/ui/add-promotion-button';
 import CompanyPromotions from '@/components/company-promotions';
 import { fetchCompany } from '@/lib/data';
+import AddPromotionButton from '@/ui/add-promotion-button';
 // import { CompanyShema } from '@/types';
 import Company from '@/ui/company';
 import Loader from '@/ui/loader/loader';

@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 type Props = {
     headers: ReactNode;
-    children?: ReactNode;
+    children: ReactNode;
 };
 
 export default function SummaryTable(props: Props) {

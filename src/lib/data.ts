@@ -1,12 +1,12 @@
-import { CompanyMapper, CompanyShema, CountriesMapper, PromotionMapper, PromotionsMapper, SalesMapper, StatisticsMapper } from '@/types';
+import { CompanyMapper, CompanyShema, CountriesMapper, PromotionMapper, PromotionShema, PromotionsMapper, SalesMapper, StatisticsMapper } from '@/types';
 
 export async function fetchStatistics() {
     try {
-        const dataPromotions = await fetch(`${process.env.API_HOST}/promotions`);
-        const promotions: PromotionMapper[] = await dataPromotions.json();
+        const promotionsData = await fetch(`${process.env.API_HOST}/promotions`);
+        const promotions: PromotionShema[] = await promotionsData.json();
 
-        const dataCompanies = await fetch(`${process.env.API_HOST}/companies`);
-        const companies: CompanyShema[] = await dataCompanies.json();
+        const companiesData = await fetch(`${process.env.API_HOST}/companies`);
+        const companies: CompanyShema[] = await companiesData.json();
 
         const statistics: StatisticsMapper = [
             {
@@ -27,7 +27,9 @@ export async function fetchStatistics() {
             },
             {
                 label: 'New companies',
-                value: companies.filter((company) => new Date(company.joinedAt).getFullYear() > 1999).length
+                value: companies.filter(
+                    (company) => new Date(company.joinedAt).getFullYear() > 1999
+                ).length
             },
             {
                 label: 'Total active companies',
@@ -117,11 +119,11 @@ export async function fetchCountries() {
 
 export async function fetchPromotions() {
     try {
-        const dataPromotions = await fetch(`${process.env.API_HOST}/promotions`);
-        const promotions: PromotionMapper[] = await dataPromotions.json();
+        const promotionsData = await fetch(`${process.env.API_HOST}/promotions`);
+        const promotions: PromotionShema[] = await promotionsData.json();
 
-        const dataCompanies = await fetch(`${process.env.API_HOST}/companies`);
-        const companies: CompanyShema[] = await dataCompanies.json();
+        const companiesData = await fetch(`${process.env.API_HOST}/companies`);
+        const companies: CompanyShema[] = await companiesData.json();
 
         const transformedPromotions: PromotionsMapper = promotions.slice(0, 20).map(
             (promotion) => {
@@ -148,9 +150,12 @@ export async function fetchPromotions() {
 
 export async function fetchCompanies() {
     try {
-        const data = await fetch(`${process.env.API_HOST}/companies`, {
-            next: { tags: ['companies'] }
-        });
+        const data = await fetch(
+            `${process.env.API_HOST}/companies`,
+            {
+                next: { tags: ['companies'] }
+            }
+        );
         const companies: CompanyShema[] = await data.json();
 
         const transformedCompanies = companies.map<CompanyMapper>(
@@ -209,7 +214,8 @@ export async function fetchCompany(id: string) {
 
 export async function fetchCompanyPromotions(id: string) {
     try {
-        const data = await fetch(`${process.env.API_HOST}/companies/${id}/promotions`,
+        const data = await fetch(
+            `${process.env.API_HOST}/companies/${id}/promotions`,
             {
                 next: { tags: ['promotions'] }
             }
@@ -224,17 +230,20 @@ export async function fetchCompanyPromotions(id: string) {
         return promotions;
     } catch (error) {
         console.error('Error:', error);
-        throw new Error('Failed to fetch the promotions.');
+        throw new Error('Failed to fetch the promotions of company.');
     }
 }
 
-export async function createCompanyById(newCompany: CompanyShema) {
+export async function createCompany(newCompany: Omit<CompanyShema, 'id'>) {
     try {
-        const data = await fetch(`${process.env.API_HOST}/companies`, {
-            method: 'POST',
-            headers: {'content-type':'application/json'},
-            body: JSON.stringify(newCompany)
-          });
+        const data = await fetch(
+            `${process.env.API_HOST}/companies`,
+            {
+                method: 'POST',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify(newCompany)
+            }
+        );
 
         if (data.ok) {
             const company: CompanyShema = await data.json();
@@ -243,15 +252,18 @@ export async function createCompanyById(newCompany: CompanyShema) {
         }
     } catch (error) {
         console.error('Error:', error);
-        throw new Error('Failed to fetch the company.');
+        throw new Error('Failed to added the company.');
     }
 }
 
-export async function deleteCompanyById(id: string) {
+export async function deleteCompany(id: string) {
     try {
-        const data = await fetch(`${process.env.API_HOST}/companies/${id}`, {
-            method: 'DELETE',
-        });
+        const data = await fetch(
+            `${process.env.API_HOST}/companies/${id}`,
+            {
+                method: 'DELETE',
+            }
+        );
 
         if (data.ok) {
             const company: CompanyShema = await data.json();
@@ -260,11 +272,38 @@ export async function deleteCompanyById(id: string) {
         }
     } catch (error) {
         console.error('Error:', error);
-        throw new Error('Failed to fetch the company.');
+        throw new Error('Failed to delete the company.');
     }
 }
 
-export async function deletePromotionById(companyId: string, id: string) {
+export async function createPromotion(
+    companyId: string,
+    newPromotion: Omit<PromotionShema, 'id' | 'companyId'>
+) {
+    try {
+        const data = await fetch(
+            `${process.env.API_HOST}/companies/${companyId}/promotions`,
+            {
+                method: 'POST',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify(newPromotion)
+            }
+        );
+
+        // TODO: В компанії міняти статус промоцій
+
+        if (data.ok) {
+            const promotion: PromotionShema = await data.json();
+
+            console.log(`The promotion ${promotion.title} has been successfully added.`);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error('Failed to added the company.');
+    }
+}
+
+export async function deletePromotion(companyId: string, id: string) {
     try {
         const data = await fetch(
             `${process.env.API_HOST}/companies/${companyId}/promotions/${id}`,
@@ -273,13 +312,15 @@ export async function deletePromotionById(companyId: string, id: string) {
             }
         );
 
+        // TODO: В компанії міняти статус промоцій
+
         if (data.ok) {
-            const promotion: PromotionMapper = await data.json();
+            const promotion: PromotionShema = await data.json();
 
             console.log(`The promotion ${promotion.title} has been successfully deleted.`);
         }
     } catch (error) {
         console.error('Error:', error);
-        throw new Error('Failed to fetch the company.');
+        throw new Error('Failed to delete the promotion.');
     }
 }

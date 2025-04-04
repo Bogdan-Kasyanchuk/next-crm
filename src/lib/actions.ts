@@ -5,21 +5,20 @@ import { redirect } from 'next/navigation';
 
 import { CompanyStatusType } from '@/enums';
 import { randomNumberMinMax } from '@/mock/randomNumber';
-import { CompanyShema } from '@/types';
+import { CompanyShema, PromotionShema } from '@/types';
 
-import { countries, Country } from './../mock/data';
-import { createCompanyById, deleteCompanyById, deletePromotionById } from './data';
+import { countries, CodeCountry, categories, CodeCategory } from './../mock/data';
+import { createCompany, createPromotion, deleteCompany, deletePromotion } from './data';
 
-export async function createCompany(formData: FormData) {
-    const newCompany: CompanyShema = {
-        id: crypto.randomUUID(),
+export async function actionCreateCompany(formData: FormData) {
+    const newCompany: Omit<CompanyShema, 'id'> = {
         title: formData.get('title') as string,
         logo: formData.get('logo') as string,
-        category: formData.get('category') as string,
+        category: categories[formData.get('codeCategory') as CodeCategory],
         status: formData.get('status') as CompanyStatusType,
         country: {
-            title: countries[formData.get('countryCode') as Country],
-            code: formData.get('countryCode') as string,
+            title: countries[formData.get('codeCountry') as CodeCountry],
+            code: formData.get('codeCountry') as string,
         },
         joinedAt: new Date(formData.get('joinedAt') as string).toISOString(),
         hasPromotions: false,
@@ -28,17 +27,30 @@ export async function createCompany(formData: FormData) {
         description: formData.get('description') as string
     };
 
-    await createCompanyById(newCompany);
+    await createCompany(newCompany);
     revalidateTag('companies');
     redirect('/companies');
 }
 
-export async function deleteCompany({ id }: { id: string }) {
-    await deleteCompanyById(id);
+export async function actionDeleteCompany({ id }: { id: string }) {
+    await deleteCompany(id);
     revalidateTag('companies');
 }
 
-export async function deletePromotion({ companyId, id }: { companyId: string, id: string }) {
-    await deletePromotionById(companyId, id);
+export async function actionCreatePromotion(companyId: string, formData: FormData) {
+    const newPromotion: Omit<PromotionShema, 'id' | 'companyId'> = {
+        title: formData.get('title') as string,
+        image: formData.get('image') as string,
+        discount: formData.get('discount') as string,
+        description: formData.get('description') as string
+    };
+
+    await createPromotion(companyId, newPromotion);
+    revalidateTag('promotions');
+    redirect(`/companies/${companyId}`);
+}
+
+export async function actionDeletePromotion({ companyId, id }: { companyId: string, id: string }) {
+    await deletePromotion(companyId, id);
     revalidateTag('promotions');
 }

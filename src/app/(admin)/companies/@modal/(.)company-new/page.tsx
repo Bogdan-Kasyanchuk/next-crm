@@ -15,11 +15,7 @@ export default function Page() {
                 () => { router.back(); }
             }
         >
-            <CompanyForm
-                onSubmit={
-                    () => { router.back(); }
-                }
-            />
+            <CompanyForm />
         </Modal>
     );
 }

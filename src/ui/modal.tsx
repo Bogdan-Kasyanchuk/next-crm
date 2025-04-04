@@ -17,7 +17,7 @@ export default function Modal(props: ModalProps) {
         >
             <Dialog
                 as="div"
-                className="fixed inset-0 z-50 flex items-center"
+                className="px-5 fixed inset-0 z-50 flex items-center"
                 onClose={props.onClose}
             >
                 <Transition.Child
@@ -31,7 +31,7 @@ export default function Modal(props: ModalProps) {
                 >
                     <div className="fixed inset-0 transition-opacity" />
                 </Transition.Child>
-                <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white shadow-xl transition-all p-7 mx-auto sm:my-10 sm:w-full sm:max-w-2xl">
+                <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white shadow-xl transition-all p-7 mx-auto sm:my-10 w-full sm:max-w-2xl">
                     {props.children}
                 </Dialog.Panel>
             </Dialog>

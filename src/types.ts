@@ -19,6 +19,15 @@ export type CompanyShema = {
     description?: string;
 };
 
+export type PromotionShema = {
+    id: string;
+    companyId: string;
+    title: string;
+    image: string;
+    discount: string;
+    description?: string;
+}
+
 export type CompanyMapper = {
     id: string;
     title: string;
@@ -34,14 +43,7 @@ export type CompanyMapper = {
     description?: string;
 };
 
-export type PromotionMapper = {
-    id: string;
-    companyId: string;
-    title: string;
-    image: string;
-    discount: number;
-    description?: string;
-}
+export type PromotionMapper = PromotionShema
 
 export type StatisticsMapper = Array<{
     label: string;
@@ -58,7 +60,7 @@ export type SalesMapper = Array<{
 
 export type PromotionsMapper = Array<{
     title: string;
-    discount: number;
+    discount: string;
     company: {
         id: string;
         title: string;
