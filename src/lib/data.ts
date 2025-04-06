@@ -46,8 +46,8 @@ export async function fetchStatistics() {
 
 export async function fetchSales() {
     try {
-        const data = await fetch(`${process.env.API_HOST}/companies`);
-        const companies: CompanyShema[] = await data.json();
+        const companiesData = await fetch(`${process.env.API_HOST}/companies`);
+        const companies: CompanyShema[] = await companiesData.json();
 
         const sales: SalesMapper = companies.slice(0, 10).map(
             (company) => ({
@@ -68,8 +68,8 @@ export async function fetchSales() {
 
 export async function fetchCategories() {
     try {
-        const data = await fetch(`${process.env.API_HOST}/companies`);
-        const companies: CompanyShema[] = await data.json();
+        const companiesData = await fetch(`${process.env.API_HOST}/companies`);
+        const companies: CompanyShema[] = await companiesData.json();
 
         const categories: StatisticsMapper = companies.reduce(
             (acc, company) => {
@@ -93,8 +93,8 @@ export async function fetchCategories() {
 
 export async function fetchCountries() {
     try {
-        const data = await fetch(`${process.env.API_HOST}/companies`);
-        const companies: CompanyShema[] = await data.json();
+        const companiesData = await fetch(`${process.env.API_HOST}/companies`);
+        const companies: CompanyShema[] = await companiesData.json();
 
         const countries: CountriesMapper = companies.reduce(
             (acc, company) => {
@@ -150,13 +150,13 @@ export async function fetchPromotions() {
 
 export async function fetchCompanies() {
     try {
-        const data = await fetch(
+        const companiesData = await fetch(
             `${process.env.API_HOST}/companies`,
             {
                 next: { tags: ['companies'] }
             }
         );
-        const companies: CompanyShema[] = await data.json();
+        const companies: CompanyShema[] = await companiesData.json();
 
         const transformedCompanies = companies.map<CompanyMapper>(
             (company) => ({
@@ -183,13 +183,13 @@ export async function fetchCompanies() {
 
 export async function fetchCompany(id: string) {
     try {
-        const data = await fetch(`${process.env.API_HOST}/companies/${id}`);
+        const companyData = await fetch(`${process.env.API_HOST}/companies/${id}`);
 
-        if (!data.ok) {
+        if (!companyData.ok) {
             return undefined;
         }
 
-        const company: CompanyShema = await data.json();
+        const company: CompanyShema = await companyData.json();
 
         const transformedCompany: CompanyMapper = {
             id: company.id,
@@ -214,18 +214,18 @@ export async function fetchCompany(id: string) {
 
 export async function fetchCompanyPromotions(id: string) {
     try {
-        const data = await fetch(
+        const promotionsData = await fetch(
             `${process.env.API_HOST}/companies/${id}/promotions`,
             {
                 next: { tags: ['promotions'] }
             }
         );
 
-        if (!data.ok) {
+        if (!promotionsData.ok) {
             return [];
         }
 
-        const promotions: PromotionMapper[] = await data.json();
+        const promotions: PromotionMapper[] = await promotionsData.json();
 
         return promotions;
     } catch (error) {
@@ -236,7 +236,7 @@ export async function fetchCompanyPromotions(id: string) {
 
 export async function createCompany(newCompany: Omit<CompanyShema, 'id'>) {
     try {
-        const data = await fetch(
+        const companyData = await fetch(
             `${process.env.API_HOST}/companies`,
             {
                 method: 'POST',
@@ -245,8 +245,8 @@ export async function createCompany(newCompany: Omit<CompanyShema, 'id'>) {
             }
         );
 
-        if (data.ok) {
-            const company: CompanyShema = await data.json();
+        if (companyData.ok) {
+            const company: CompanyShema = await companyData.json();
 
             console.log(`The company ${company.title} has been successfully added.`);
         }
@@ -258,17 +258,24 @@ export async function createCompany(newCompany: Omit<CompanyShema, 'id'>) {
 
 export async function deleteCompany(id: string) {
     try {
-        const data = await fetch(
+        const companyData = await fetch(
             `${process.env.API_HOST}/companies/${id}`,
             {
                 method: 'DELETE',
             }
         );
 
-        if (data.ok) {
-            const company: CompanyShema = await data.json();
+        if (companyData.ok) {
+            const company: CompanyShema = await companyData.json();
 
-            console.log(`The company ${company.title} has been successfully deleted.`);
+            if (company.hasPromotions) {
+                const promotionsData = await fetch(`${process.env.API_HOST}/promotions?companyId=${id}`);
+
+                console.log(`The company ${company.title} has been successfully deleted.`);
+
+            } else {
+                console.log(`The company ${company.title} has been successfully deleted.`);
+            }
         }
     } catch (error) {
         console.error('Error:', error);
@@ -281,8 +288,8 @@ export async function createPromotion(
     newPromotion: Omit<PromotionShema, 'id' | 'companyId'>
 ) {
     try {
-        const data = await fetch(
-            `${process.env.API_HOST}/companies/${companyId}/promotions`,
+        const promotionData = await fetch(
+            `${process.env.API_HOST} /companies/${companyId}/promotions`,
             {
                 method: 'POST',
                 headers: { 'content-type': 'application/json' },
@@ -290,12 +297,21 @@ export async function createPromotion(
             }
         );
 
-        // TODO: В компанії міняти статус промоцій
+        if (promotionData.ok) {
+            const companyData = await fetch(
+                `${process.env.API_HOST}/companies/${companyId}`,
+                {
+                    method: 'PUT',
+                    headers: { 'content-type': 'application/json' },
+                    body: JSON.stringify({ hasPromotions: true })
+                }
+            );
 
-        if (data.ok) {
-            const promotion: PromotionShema = await data.json();
+            if (companyData.ok) {
+                const promotion: PromotionShema = await promotionData.json();
 
-            console.log(`The promotion ${promotion.title} has been successfully added.`);
+                console.log(`The promotion ${promotion.title} has been successfully added.`);
+            }
         }
     } catch (error) {
         console.error('Error:', error);
@@ -305,19 +321,37 @@ export async function createPromotion(
 
 export async function deletePromotion(companyId: string, id: string) {
     try {
-        const data = await fetch(
+        const promotionData = await fetch(
             `${process.env.API_HOST}/companies/${companyId}/promotions/${id}`,
             {
                 method: 'DELETE',
             }
         );
 
-        // TODO: В компанії міняти статус промоцій
+        if (promotionData.ok) {
+            const promotionsData = await fetch(`${process.env.API_HOST}/companies/${companyId}/promotions`);
 
-        if (data.ok) {
-            const promotion: PromotionShema = await data.json();
+            if (!promotionsData.ok) {
+                const companyData = await fetch(
+                    `${process.env.API_HOST}/companies/${companyId}`,
+                    {
+                        method: 'PUT',
+                        headers: { 'content-type': 'application/json' },
+                        body: JSON.stringify({ hasPromotions: false })
+                    }
+                );
 
-            console.log(`The promotion ${promotion.title} has been successfully deleted.`);
+                if (companyData.ok) {
+                    const promotion: PromotionShema = await promotionData.json();
+
+                    console.log(`The promotion ${promotion.title} has been successfully deleted.`);
+                }
+
+            } else {
+                const promotion: PromotionShema = await promotionData.json();
+
+                console.log(`The promotion ${promotion.title} has been successfully deleted.`);
+            }
         }
     } catch (error) {
         console.error('Error:', error);
