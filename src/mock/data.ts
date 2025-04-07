@@ -26,6 +26,13 @@ export const user = {
     email: 'adamsmith@gmail.com',
 };
 
+export const statisticLabel = {
+    totalPromotions: 'Total promotions',
+    totalCategories: 'Total categories',
+    newCompanies: 'New companies',
+    totalActiveCompanies: 'Total active companies',
+};
+
 export const categories: Record<CodeCategory, string> = {
     manufacturing: 'Manufacturing',
     trade: 'Trade',

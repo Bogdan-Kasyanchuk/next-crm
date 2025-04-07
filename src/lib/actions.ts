@@ -38,14 +38,15 @@ export async function actionDeleteCompany({ id }: { id: string }) {
 }
 
 export async function actionCreatePromotion(companyId: string, formData: FormData) {
-    const newPromotion: Omit<PromotionShema, 'id' | 'companyId'> = {
+    const newPromotion: Omit<PromotionShema, 'id'> = {
+        companyId,
         title: formData.get('title') as string,
         image: formData.get('image') as string,
         discount: formData.get('discount') as string,
         description: formData.get('description') as string
     };
 
-    await createPromotion(companyId, newPromotion);
+    await createPromotion(newPromotion);
     revalidateTag('promotions');
     redirect(`/companies/${companyId}`);
 }

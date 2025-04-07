@@ -1,3 +1,4 @@
+import { statisticLabel } from '@/mock/data';
 import { CompanyMapper, CompanyShema, CountriesMapper, PromotionMapper, PromotionShema, PromotionsMapper, SalesMapper, StatisticsMapper } from '@/types';
 
 export async function fetchStatistics() {
@@ -10,11 +11,11 @@ export async function fetchStatistics() {
 
         const statistics: StatisticsMapper = [
             {
-                label: 'Total promotions',
+                label: statisticLabel.totalPromotions,
                 value: promotions.length,
             },
             {
-                label: 'Total categories',
+                label: statisticLabel.totalCategories,
                 value: companies.reduce(
                     (acc, company) => {
                         if (acc.includes(company.category)) {
@@ -26,13 +27,13 @@ export async function fetchStatistics() {
                 ).length
             },
             {
-                label: 'New companies',
+                label: statisticLabel.newCompanies,
                 value: companies.filter(
                     (company) => new Date(company.joinedAt).getFullYear() > 1999
                 ).length
             },
             {
-                label: 'Total active companies',
+                label: statisticLabel.totalActiveCompanies,
                 value: companies.filter((company) => company.status === 'active').length,
             },
         ];
@@ -215,7 +216,7 @@ export async function fetchCompany(id: string) {
 export async function fetchCompanyPromotions(id: string) {
     try {
         const promotionsData = await fetch(
-            `${process.env.API_HOST}/companies/${id}/promotions`,
+            `${process.env.API_HOST}/promotions?companyId=${id}`,
             {
                 next: { tags: ['promotions'] }
             }
@@ -256,6 +257,28 @@ export async function createCompany(newCompany: Omit<CompanyShema, 'id'>) {
     }
 }
 
+export async function deleteOnePromotion(id: string) {
+    try {
+        const promotionData = await fetch(
+            `${process.env.API_HOST}/promotions/${id}`,
+            {
+                method: 'DELETE',
+            }
+        );
+
+        console.log('promotionData', promotionData);
+
+        if (promotionData.ok) {
+            const promotion: PromotionShema = await promotionData.json();
+
+            console.log(`The promotion ${promotion.title} has been successfully deleted.`);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error('Failed to delete the promotion.');
+    }
+}
+
 export async function deleteCompany(id: string) {
     try {
         const companyData = await fetch(
@@ -271,6 +294,14 @@ export async function deleteCompany(id: string) {
             if (company.hasPromotions) {
                 const promotionsData = await fetch(`${process.env.API_HOST}/promotions?companyId=${id}`);
 
+                if (promotionsData.ok) {
+                    const promotions: PromotionShema[] = await promotionsData.json();
+
+                    for (const promotion of promotions) {
+                        await deleteOnePromotion(promotion.id);
+                    }
+                }
+
                 console.log(`The company ${company.title} has been successfully deleted.`);
 
             } else {
@@ -283,13 +314,10 @@ export async function deleteCompany(id: string) {
     }
 }
 
-export async function createPromotion(
-    companyId: string,
-    newPromotion: Omit<PromotionShema, 'id' | 'companyId'>
-) {
+export async function createPromotion(newPromotion: Omit<PromotionShema, 'id'>) {
     try {
         const promotionData = await fetch(
-            `${process.env.API_HOST} /companies/${companyId}/promotions`,
+            `${process.env.API_HOST}/promotions`,
             {
                 method: 'POST',
                 headers: { 'content-type': 'application/json' },
@@ -299,7 +327,7 @@ export async function createPromotion(
 
         if (promotionData.ok) {
             const companyData = await fetch(
-                `${process.env.API_HOST}/companies/${companyId}`,
+                `${process.env.API_HOST}/companies/${newPromotion.companyId}`,
                 {
                     method: 'PUT',
                     headers: { 'content-type': 'application/json' },
@@ -322,14 +350,14 @@ export async function createPromotion(
 export async function deletePromotion(companyId: string, id: string) {
     try {
         const promotionData = await fetch(
-            `${process.env.API_HOST}/companies/${companyId}/promotions/${id}`,
+            `${process.env.API_HOST}/promotions/${id}`,
             {
                 method: 'DELETE',
             }
         );
 
         if (promotionData.ok) {
-            const promotionsData = await fetch(`${process.env.API_HOST}/companies/${companyId}/promotions`);
+            const promotionsData = await fetch(`${process.env.API_HOST}/promotions?companyId=${companyId}`);
 
             if (!promotionsData.ok) {
                 const companyData = await fetch(
