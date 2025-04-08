@@ -6,17 +6,25 @@ export default async function Companies() {
     const companies = await fetchCompanies();
 
     return (
-        <CompanyTable>
+        <>
             {
-                companies.map(
-                    (company) => (
-                        <CompanyRow
-                            key={company.id}
-                            company={company}
-                        />
-                    )
-                )
+                companies
+                    ? <CompanyTable>
+                        {
+                            companies.map(
+                                (company) => (
+                                    <CompanyRow
+                                        key={company.id}
+                                        company={company}
+                                    />
+                                )
+                            )
+                        }
+                    </CompanyTable>
+                    : <div className='border border-gray-300 rounded flex justify-center items-center w-full h-full'>
+                        <p className="text-5xl">Сompanies not found</p>
+                    </div>
             }
-        </CompanyTable>
+        </>
     );
 }

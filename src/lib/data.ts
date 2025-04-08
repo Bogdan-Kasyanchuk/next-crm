@@ -6,11 +6,13 @@ export async function fetchStatistics() {
         const companiesData = await fetch(`${process.env.API_HOST}/companies`);
         const promotionsData = await fetch(`${process.env.API_HOST}/promotions`);
 
-        if (!promotionsData.ok && !companiesData.ok) {
+        if (!promotionsData.ok || !companiesData.ok) {
             console.log(
                 'Companies error: ', companiesData.status,
                 'Promotions error: ', promotionsData.status,
             );
+
+            return undefined;
         } else {
             const companies: CompanyShema[] = await companiesData.json();
             const promotions: PromotionShema[] = await promotionsData.json();
@@ -58,6 +60,8 @@ export async function fetchSales() {
 
         if (!companiesData.ok) {
             console.log('Companies error: ', companiesData.status);
+
+            return undefined;
         } else {
             const companies: CompanyShema[] = await companiesData.json();
 
@@ -85,6 +89,8 @@ export async function fetchCategories() {
 
         if (!companiesData.ok) {
             console.log('Companies error: ', companiesData.status);
+
+            return undefined;
         } else {
             const companies: CompanyShema[] = await companiesData.json();
 
@@ -115,6 +121,8 @@ export async function fetchCountries() {
 
         if (!companiesData.ok) {
             console.log('Companies error: ', companiesData.status);
+
+            return undefined;
         } else {
             const companies: CompanyShema[] = await companiesData.json();
 
@@ -145,14 +153,20 @@ export async function fetchPromotions() {
         const companiesData = await fetch(`${process.env.API_HOST}/companies`);
         const promotionsData = await fetch(`${process.env.API_HOST}/promotions`);
 
-        if (!promotionsData.ok && !companiesData.ok) {
+        if (!companiesData.ok || !promotionsData.ok) {
             console.log(
                 'Companies error: ', companiesData.status,
                 'Promotions error: ', promotionsData.status,
             );
+
+            return undefined;
         } else {
             const companies: CompanyShema[] = await companiesData.json();
             const promotions: PromotionShema[] = await promotionsData.json();
+
+            if (!promotions.length) {
+                return undefined;
+            }
 
             const transformedPromotions: PromotionsMapper = promotions.slice(0, 20).map(
                 (promotion) => {
@@ -189,8 +203,14 @@ export async function fetchCompanies() {
 
         if (!companiesData.ok) {
             console.log('Companies error: ', companiesData.status);
+
+            return undefined;
         } else {
             const companies: CompanyShema[] = await companiesData.json();
+
+            if (!companies.length) {
+                return undefined;
+            }
 
             const transformedCompanies = companies.map<CompanyMapper>(
                 (company) => ({
@@ -222,25 +242,28 @@ export async function fetchCompany(id: string) {
 
         if (!companyData.ok) {
             console.log('Company error: ', companyData.status);
+
+            return undefined;
+        } else {
+
+            const company: CompanyShema = await companyData.json();
+
+            const transformedCompany: CompanyMapper = {
+                id: company.id,
+                title: company.title,
+                logo: company.logo,
+                category: company.category,
+                status: company.status,
+                country: {
+                    title: company.country.title,
+                    code: company.country.code
+                },
+                joinedAt: company.joinedAt,
+                description: company.description
+            };
+
+            return transformedCompany;
         }
-
-        const company: CompanyShema = await companyData.json();
-
-        const transformedCompany: CompanyMapper = {
-            id: company.id,
-            title: company.title,
-            logo: company.logo,
-            category: company.category,
-            status: company.status,
-            country: {
-                title: company.country.title,
-                code: company.country.code
-            },
-            joinedAt: company.joinedAt,
-            description: company.description
-        };
-
-        return transformedCompany;
     } catch (error) {
         console.error('Error:', error);
         throw new Error('Failed to fetch the company.');
@@ -258,11 +281,11 @@ export async function fetchCompanyPromotions(id: string) {
 
         if (!promotionsData.ok) {
             return [];
+        } else {
+            const promotions: PromotionMapper[] = await promotionsData.json();
+
+            return promotions;
         }
-
-        const promotions: PromotionMapper[] = await promotionsData.json();
-
-        return promotions;
     } catch (error) {
         console.error('Error:', error);
         throw new Error('Failed to fetch the promotions of company.');
@@ -381,9 +404,6 @@ export async function deletePromotion(companyId: string, id: string) {
             const promotionsData = await fetch(`${process.env.API_HOST}/promotions?companyId=${companyId}`);
 
             if (!promotionsData.ok) {
-                console.log('Promotions error: ', promotionData.status);
-            } else {
-
                 const companyData = await fetch(
                     `${process.env.API_HOST}/companies/${companyId}`,
                     {

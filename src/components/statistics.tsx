@@ -6,18 +6,26 @@ export default async function Statistics() {
     const statistics = await fetchStatistics();
 
     return (
-        <div className='grid grid-cols-2 gap-5 xl:grid-cols-4'>
+        <>
             {
-                statistics.map(
-                    (statistic, i) => (
-                        <StatisticCard
-                            key={i}
-                            type={StatisticCardType.GRADIENT}
-                            statistic={statistic}
-                        />
-                    )
-                )
+                statistics
+                    ? <div className='grid grid-cols-2 gap-5 xl:grid-cols-4'>
+                        {
+                            statistics.map(
+                                (statistic, i) => (
+                                    <StatisticCard
+                                        key={i}
+                                        type={StatisticCardType.GRADIENT}
+                                        statistic={statistic}
+                                    />
+                                )
+                            )
+                        }
+                    </div>
+                    : <div className='border border-gray-300 rounded flex justify-center items-center w-full h-full'>
+                        <p className="text-5xl">Statistics not found</p>
+                    </div>
             }
-        </div>
+        </>
     );
 }

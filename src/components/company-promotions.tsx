@@ -28,7 +28,7 @@ export default async function CompanyPromotions(props: Props) {
                             )
                         }
                     </div>
-                    : <div className="flex items-center justify-center w-full h-full">
+                    : <div className='border border-gray-300 rounded flex justify-center items-center w-full h-full'>
                         <p className="text-5xl">No promotions</p>
                     </div>
             }
