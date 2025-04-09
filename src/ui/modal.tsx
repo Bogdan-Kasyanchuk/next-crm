@@ -17,7 +17,7 @@ export default function Modal(props: ModalProps) {
         >
             <Dialog
                 as="div"
-                className="px-5 fixed inset-0 z-50 flex items-center"
+                className="px-5 fixed inset-0 z-50 flex items-center bg-black/70"
                 onClose={props.onClose}
             >
                 <Transition.Child

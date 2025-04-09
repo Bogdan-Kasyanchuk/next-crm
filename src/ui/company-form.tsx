@@ -1,7 +1,6 @@
 import Image from 'next/image';
 
 import { CompanyStatusType } from '@/enums';
-import { actionCreateCompany } from '@/lib/actions';
 import { categories, countries, CodeCountry, CodeCategory } from '@/mock/data';
 import { randomImage } from '@/mock/randomImage';
 
@@ -9,15 +8,28 @@ import InputField from './input-field';
 import SelectField from './select-field';
 import SubmitButton from './submit-button';
 
-export default function CompanyForm() {
+type CompanyFormProps = {
+    title: string,
+    initialValues?: {
+        status: CompanyStatusType,
+        codeCountry: string,
+        title: string,
+        codeCategory: string,
+        joinedAt: string,
+        description?: string,
+    },
+    action: (formData: FormData) => Promise<void>
+}
+
+export default function CompanyForm(props: CompanyFormProps) {
     const logo = randomImage(200, 200);
 
     return (
         <form
-            action={actionCreateCompany}
+            action={props.action}
             className="flex flex-col gap-10"
         >
-            <p className="mb-0.5 text-xl">Add new company</p>
+            <p className="mb-0.5 text-xl">{props.title}</p>
 
             <div className="flex gap-6">
                 <div className="flex flex-col flex-1 gap-5">
@@ -42,6 +54,7 @@ export default function CompanyForm() {
 
                     <SelectField
                         required
+                        defaultValue={props.initialValues?.status}
                         label="Status"
                         name="status"
                         className="capitalize"
@@ -62,6 +75,7 @@ export default function CompanyForm() {
 
                     <SelectField
                         required
+                        defaultValue={props.initialValues?.codeCountry}
                         label="Country"
                         name="codeCountry"
                     >
@@ -83,6 +97,7 @@ export default function CompanyForm() {
                 <div className="flex flex-col flex-1 gap-5">
                     <InputField
                         required
+                        defaultValue={props.initialValues?.title}
                         label="Title"
                         placeholder="Title"
                         name="title"
@@ -90,6 +105,7 @@ export default function CompanyForm() {
 
                     <SelectField
                         required
+                        defaultValue={props.initialValues?.codeCategory}
                         label="Category"
                         name="codeCategory"
                     >
@@ -109,13 +125,14 @@ export default function CompanyForm() {
 
                     <InputField
                         required
+                        defaultValue={props.initialValues?.joinedAt}
                         label="Joined date"
                         type="date"
                         name="joinedAt"
                     />
 
                     <InputField
-                        required
+                        defaultValue={props.initialValues?.description}
                         label="Description"
                         placeholder="Description"
                         name="description"
@@ -124,8 +141,9 @@ export default function CompanyForm() {
             </div>
 
             <SubmitButton >
-                Add company
+                {props.title === 'Update company' ? 'Update' : 'Create'}
             </SubmitButton>
         </form>
     );
 }
+

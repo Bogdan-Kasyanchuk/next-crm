@@ -2,6 +2,7 @@
 
 import { useRouter } from 'next/navigation';
 
+import { actionCreateCompany } from '@/lib/actions';
 import CompanyForm from '@/ui/company-form';
 import Modal from '@/ui/modal';
 
@@ -15,7 +16,10 @@ export default function Page() {
                 () => { router.back(); }
             }
         >
-            <CompanyForm />
+            <CompanyForm
+                title='Add new company'
+                action={actionCreateCompany}
+            />
         </Modal>
     );
 }

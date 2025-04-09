@@ -4,11 +4,11 @@ import { fetchCompanyPromotions } from '@/lib/data';
 import Promotion from '@/ui/promotion';
 
 type Props = {
-    id: string
+    companyId: string
 };
 
 export default async function CompanyPromotions(props: Props) {
-    const promotions = await fetchCompanyPromotions(props.id);
+    const promotions = await fetchCompanyPromotions(props.companyId);
 
     return (
         <>

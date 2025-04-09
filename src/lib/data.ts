@@ -193,6 +193,7 @@ export async function fetchPromotions() {
 }
 
 export async function fetchCompanies() {
+
     try {
         const companiesData = await fetch(
             `${process.env.API_HOST}/companies`,
@@ -225,6 +226,7 @@ export async function fetchCompanies() {
                     },
                     joinedAt: company.joinedAt,
                     hasPromotions: company.hasPromotions,
+                    description: company.description,
                 })
             );
 
@@ -316,6 +318,33 @@ export async function createCompany(newCompany: Omit<CompanyShema, 'id'>) {
     }
 }
 
+export async function updateCompany(
+    id: string,
+    newCompany: Omit<CompanyShema, 'id' | 'hasPromotions' | 'sold' | 'income'>,
+) {
+    try {
+        const companyData = await fetch(
+            `${process.env.API_HOST}/companies/${id}`,
+            {
+                method: 'PUT',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify(newCompany)
+            }
+        );
+
+        if (!companyData.ok) {
+            console.log('Company error: ', companyData.status);
+        } else {
+            const company: CompanyShema = await companyData.json();
+
+            console.log(`The company ${company.title} has been successfully updated.`);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error('Failed to update the company.');
+    }
+}
+
 export async function deleteCompany(id: string) {
     try {
         const companyData = await fetch(
@@ -385,7 +414,34 @@ export async function createPromotion(newPromotion: Omit<PromotionShema, 'id'>) 
         }
     } catch (error) {
         console.error('Error:', error);
-        throw new Error('Failed to added the company.');
+        throw new Error('Failed to added the promotion.');
+    }
+}
+
+export async function updatePromotion(
+    id: string,
+    newPromotion: Omit<PromotionShema, 'id' | 'companyId'>
+) {
+    try {
+        const promotionData = await fetch(
+            `${process.env.API_HOST}/promotions/${id}`,
+            {
+                method: 'PUT',
+                headers: { 'content-type': 'application/json' },
+                body: JSON.stringify(newPromotion)
+            }
+        );
+
+        if (!promotionData.ok) {
+            console.log('Promotion error: ', promotionData.status);
+        } else {
+            const promotion: PromotionShema = await promotionData.json();
+
+            console.log(`The promotion ${promotion.title} has been successfully updated.`);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error('Failed to update the promotion.');
     }
 }
 

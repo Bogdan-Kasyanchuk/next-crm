@@ -1,26 +1,29 @@
 import Image from 'next/image';
 
-import { actionCreatePromotion } from '@/lib/actions';
 import { randomImage } from '@/mock/randomImage';
 
 import InputField from './input-field';
 import SubmitButton from './submit-button';
 
-export type PromotionFormProps = {
-    companyId: string;
+type PromotionFormProps = {
+    title: string,
+    initialValues?: {
+        title: string,
+        discount: string;
+        description?: string;
+    },
+    action: (formData: FormData) => Promise<void>
 }
 
 export default function PromotionForm(props: PromotionFormProps) {
     const image = randomImage(400, 200);
 
-    const createPromotionWithCompanyId = actionCreatePromotion.bind(null, props.companyId);
-
     return (
         <form
-            action={createPromotionWithCompanyId}
+            action={props.action}
             className="flex flex-col gap-10"
         >
-            <p className="mb-0.5 text-xl">Add new promotion</p>
+            <p className="mb-0.5 text-xl">{props.title}</p>
 
             <div className="flex gap-6">
                 <div className="flex flex-col flex-1">
@@ -46,6 +49,7 @@ export default function PromotionForm(props: PromotionFormProps) {
                 <div className="flex flex-col flex-1 gap-5">
                     <InputField
                         required
+                        defaultValue={props.initialValues?.title}
                         label="Title"
                         placeholder="Title"
                         name="title"
@@ -53,13 +57,14 @@ export default function PromotionForm(props: PromotionFormProps) {
 
                     <InputField
                         required
+                        defaultValue={props.initialValues?.discount}
                         label="Discount amount"
                         placeholder="-40%"
                         name="discount"
                     />
 
                     <InputField
-                        required
+                        defaultValue={props.initialValues?.description}
                         label="Description"
                         placeholder="Description"
                         name="description"
@@ -68,7 +73,7 @@ export default function PromotionForm(props: PromotionFormProps) {
             </div>
 
             <SubmitButton >
-                Add promotion
+                {props.title === 'Update promotion' ? 'Update' : 'Create'}
             </SubmitButton>
         </form>
     );
