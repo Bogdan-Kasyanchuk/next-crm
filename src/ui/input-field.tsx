@@ -1,11 +1,11 @@
 import clsx from 'clsx';
 import { ComponentPropsWithoutRef } from 'react';
 
-type InputProps = ComponentPropsWithoutRef<'input'> & {
+type Props = ComponentPropsWithoutRef<'input'> & {
     label?: string;
 }
 
-export default function InputField(props: InputProps) {
+export default function InputField(props: Props) {
     const { label, id, className, ...rest } = props;
 
     return (

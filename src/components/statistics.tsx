@@ -9,7 +9,7 @@ export default async function Statistics() {
         <>
             {
                 statistics
-                    ? <div className='grid grid-cols-2 gap-5 xl:grid-cols-4'>
+                    ? <div className='grid grid-cols-2 gap-5 xl:grid-cols-5'>
                         {
                             statistics.map(
                                 (statistic, i) => (

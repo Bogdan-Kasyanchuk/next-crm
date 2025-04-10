@@ -6,14 +6,14 @@ import { useRouter } from 'next/navigation';
 export default function Sidebar() {
     const router = useRouter();
 
-    const handleExitClick = () => {
-        router.push('/');
-    };
-
     return (
         <button
             className='flex items-center gap-2 p-5 mt-auto'
-            onClick={handleExitClick}
+            onClick={
+                () => {
+                    router.push('/');
+                }
+            }
         >
             <Image
                 width={18}

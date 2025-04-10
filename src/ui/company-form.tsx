@@ -9,7 +9,7 @@ import InputField from './input-field';
 import SelectField from './select-field';
 import SubmitButton from './submit-button';
 
-type CompanyFormProps = {
+type Props = {
     title: string,
     initialValues?: {
         status: CompanyStatusType,
@@ -22,7 +22,7 @@ type CompanyFormProps = {
     action: (formData: FormData) => Promise<void>
 }
 
-export default function CompanyForm(props: CompanyFormProps) {
+export default function CompanyForm(props: Props) {
     const logo = randomImage(200, 200);
 
     return (
@@ -30,7 +30,7 @@ export default function CompanyForm(props: CompanyFormProps) {
             action={props.action}
             className="flex flex-col gap-10"
         >
-            <p className="mb-0.5 text-xl">{props.title}</p>
+            <p className="text-xl leading-[30px]">{props.title}</p>
 
             <div className="flex gap-6">
                 <div className="flex flex-col flex-1 gap-5">

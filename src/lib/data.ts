@@ -19,19 +19,23 @@ export async function fetchStatistics() {
 
             const statistics: StatisticsMapper = [
                 {
+                    label: statisticLabel.totalCompanies,
+                    value: companies.length,
+                },
+                {
                     label: statisticLabel.totalPromotions,
                     value: promotions.length,
                 },
                 {
                     label: statisticLabel.totalCategories,
-                    value: companies.reduce(
+                    value: companies.reduce<string[]>(
                         (acc, company) => {
                             if (acc.includes(company.category.code)) {
                                 return acc;
                             }
                             return [...acc, company.category.code];
 
-                        }, [] as string[]
+                        }, []
                     ).length
                 },
                 {
@@ -94,14 +98,14 @@ export async function fetchCategories() {
         } else {
             const companies: CompanyShema[] = await companiesData.json();
 
-            const categories: StatisticsMapper = companies.reduce(
+            const categories: StatisticsMapper = companies.reduce<string[]>(
                 (acc, company) => {
                     if (acc.includes(company.category.code)) {
                         return acc;
                     }
                     return [...acc, company.category.code];
 
-                }, [] as string[]
+                }, []
             ).map((code) => ({
                 label: companies.find((company) => company.category.code === code)!.category.title,
                 value: companies.filter((company) => company.category.code === code).length,
@@ -126,14 +130,14 @@ export async function fetchCountries() {
         } else {
             const companies: CompanyShema[] = await companiesData.json();
 
-            const countries: CountriesMapper = companies.reduce(
+            const countries: CountriesMapper = companies.reduce<string[]>(
                 (acc, company) => {
                     if (acc.includes(company.country.code)) {
                         return acc;
                     }
                     return [...acc, company.country.code];
 
-                }, [] as string[]
+                }, []
             ).map((code) => ({
                 title: companies.find((company) => company.country.code === code)!.country.title,
                 code: code,
@@ -195,12 +199,7 @@ export async function fetchPromotions() {
 export async function fetchCompanies() {
 
     try {
-        const companiesData = await fetch(
-            `${process.env.API_HOST}/companies`,
-            {
-                next: { tags: ['companies'] }
-            }
-        );
+        const companiesData = await fetch(`${process.env.API_HOST}/companies`);
 
         if (!companiesData.ok) {
             console.log('Companies error: ', companiesData.status);
@@ -268,12 +267,7 @@ export async function fetchCompany(id: string) {
 
 export async function fetchCompanyPromotions(id: string) {
     try {
-        const promotionsData = await fetch(
-            `${process.env.API_HOST}/promotions?companyId=${id}`,
-            {
-                next: { tags: ['promotions'] }
-            }
-        );
+        const promotionsData = await fetch(`${process.env.API_HOST}/promotions?companyId=${id}`);
 
         if (!promotionsData.ok) {
             return [];

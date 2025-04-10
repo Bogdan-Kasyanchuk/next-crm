@@ -5,11 +5,11 @@ import { useFormStatus } from 'react-dom';
 
 import Button from './button';
 
-type SubmitButtonProps = {
+type Props = {
     children: ReactNode;
 };
 
-export default function SubmitButton(props: SubmitButtonProps) {
+export default function SubmitButton(props: Props) {
     const { pending } = useFormStatus();
 
     return (

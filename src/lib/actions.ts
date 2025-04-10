@@ -1,6 +1,6 @@
 'use server';
 
-import { revalidateTag } from 'next/cache';
+import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 import { CompanyStatusType } from '@/enums';
@@ -31,7 +31,10 @@ export async function actionCreateCompany(formData: FormData) {
     };
 
     await createCompany(newCompany);
-    revalidateTag('companies');
+
+    revalidatePath('/dashboard');
+    revalidatePath('/companies');
+
     redirect('/companies');
 }
 
@@ -53,12 +56,16 @@ export async function actionUpdateCompany(id: string, formData: FormData) {
     };
 
     await updateCompany(id, newCompany);
-    revalidateTag('companies');
+
+    revalidatePath('/dashboard');
+    revalidatePath('/companies');
 }
 
 export async function actionDeleteCompany({ id }: { id: string }) {
     await deleteCompany(id);
-    revalidateTag('companies');
+
+    revalidatePath('/dashboard');
+    revalidatePath('/companies');
 }
 
 export async function actionCreatePromotion(companyId: string, formData: FormData) {
@@ -71,7 +78,10 @@ export async function actionCreatePromotion(companyId: string, formData: FormDat
     };
 
     await createPromotion(newPromotion);
-    revalidateTag('promotions');
+
+    revalidatePath('/dashboard');
+    revalidatePath('/companies');
+
     redirect(`/companies/${companyId}`);
 }
 
@@ -84,10 +94,13 @@ export async function actionUpdatePromotion(id: string, formData: FormData) {
     };
 
     await updatePromotion(id, newPromotion);
-    revalidateTag('promotions');
+
+    revalidatePath('/companies/[id]', 'page');
 }
 
 export async function actionDeletePromotion({ companyId, id }: { companyId: string, id: string }) {
     await deletePromotion(companyId, id);
-    revalidateTag('promotions');
+
+    revalidatePath('/dashboard');
+    revalidatePath('/companies');
 }

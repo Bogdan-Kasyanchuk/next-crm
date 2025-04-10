@@ -1,15 +1,14 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import React from 'react';
 
 import Button from '@/ui/button';
 
-type AddPromotionButtonProps = {
+type Props = {
     id: string
 };
 
-export default function AddPromotionButton(props: AddPromotionButtonProps) {
+export default function AddPromotionButton(props: Props) {
     const router = useRouter();
 
     return (

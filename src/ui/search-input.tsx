@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import { ComponentProps, MouseEventHandler } from 'react';
 
-type SearchInputProps = ComponentProps<'input'> & {
+type Props = ComponentProps<'input'> & {
     onSearchClick?: MouseEventHandler<HTMLButtonElement>;
 }
 
-export default function SearchInput(props: SearchInputProps) {
+export default function SearchInput(props: Props) {
     const { onSearchClick, ...rest } = props;
 
     return (

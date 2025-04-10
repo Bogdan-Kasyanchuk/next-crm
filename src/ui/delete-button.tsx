@@ -33,4 +33,3 @@ export default function DeleteButton<T>(props: Props<T>) {
         </Button>
     );
 }
-

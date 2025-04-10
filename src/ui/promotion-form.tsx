@@ -5,7 +5,7 @@ import { randomImage } from '@/mock/randomImage';
 import InputField from './input-field';
 import SubmitButton from './submit-button';
 
-type PromotionFormProps = {
+type Props = {
     title: string,
     initialValues?: {
         title: string,
@@ -15,7 +15,7 @@ type PromotionFormProps = {
     action: (formData: FormData) => Promise<void>
 }
 
-export default function PromotionForm(props: PromotionFormProps) {
+export default function PromotionForm(props: Props) {
     const image = randomImage(400, 200);
 
     return (
@@ -23,7 +23,7 @@ export default function PromotionForm(props: PromotionFormProps) {
             action={props.action}
             className="flex flex-col gap-10"
         >
-            <p className="mb-0.5 text-xl">{props.title}</p>
+            <p className="text-xl leading-[30px]">{props.title}</p>
 
             <div className="flex gap-6">
                 <div className="flex flex-col flex-1">

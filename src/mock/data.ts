@@ -7,6 +7,7 @@ export const user = {
 };
 
 export const statisticLabel = {
+    totalCompanies: 'Total companies',
     totalPromotions: 'Total promotions',
     totalCategories: 'Total categories',
     newCompanies: 'New companies',

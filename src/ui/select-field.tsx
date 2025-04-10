@@ -1,12 +1,12 @@
 import clsx from 'clsx';
 import { ComponentPropsWithoutRef, ReactNode } from 'react';
 
-type SelectProps = ComponentPropsWithoutRef<'select'> & {
+type Props = ComponentPropsWithoutRef<'select'> & {
     children: ReactNode;
     label?: string;
 }
 
-export default function SelectField(props: SelectProps) {
+export default function SelectField(props: Props) {
     const { label, id, className, ...rest } = props;
 
     return (

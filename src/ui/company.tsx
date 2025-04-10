@@ -3,11 +3,11 @@ import Image from 'next/image';
 import { CompanyMapper } from '@/types';
 import StatusLabel from '@/ui/status-label';
 
-type CompanyProps = {
+type Props = {
     company: CompanyMapper;
 }
 
-export default function Company(props: CompanyProps) {
+export default function Company(props: Props) {
     return (
         <div className="flex flex-col gap-5 sticky top-[64px]">
             <div className="flex flex-col items-center p-7 gap-5 bg-gray-900 rounded">

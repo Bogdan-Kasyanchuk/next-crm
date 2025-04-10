@@ -10,7 +10,7 @@ import Loader from '@/ui/loader/loader';
 export default function Page() {
     return (
         <div className='l-page__content'>
-            <div className='col-span-12 h-[292px] xl:h-[136px]'>
+            <div className='col-span-12 h-[448px] xl:h-[136px]'>
                 <Suspense fallback={<Loader />}>
                     <Statistics />
                 </Suspense>

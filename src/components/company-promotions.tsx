@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { fetchCompanyPromotions } from '@/lib/data';
 import Promotion from '@/ui/promotion';
 

@@ -6,6 +6,7 @@ const headers = ['Category', 'Company', 'Status', 'Promotion', 'Country', 'Joine
 type Props = {
     children: ReactNode;
 };
+
 export default function CompanyTable(props: Props) {
     return (
         <table className='-mt-2 w-full border-separate table-auto border-spacing-y-2'>
