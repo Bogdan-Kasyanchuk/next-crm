@@ -25,7 +25,7 @@ export default function Company(props: CompanyProps) {
             </div>
             <div className="p-7 text-base text-gray-900 bg-gray-100 rounded">
                 <p className="pb-5 text-xl font-semibold">About company</p>
-                <p className="pb-3">{`Category: ${props.company.category}`}</p>
+                <p className="pb-3">{`Category: ${props.company.category.title}`}</p>
                 <p className="pb-3">{`Country: ${props.company.country.title}`}</p>
                 <p className="pb-3">
                     {

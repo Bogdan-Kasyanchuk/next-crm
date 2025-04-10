@@ -41,7 +41,7 @@ export default function CompanyRow(props: Props) {
                         )
                     }
                 >
-                    {props.company.category}
+                    {props.company.category.title}
                 </td>
                 <td className='min-w-[200px] pl-5 text-start'>
                     <Link
@@ -134,7 +134,7 @@ export default function CompanyRow(props: Props) {
                             status: props.company.status,
                             codeCountry: props.company.country.code,
                             title: props.company.title,
-                            codeCategory: props.company.category,
+                            codeCategory: props.company.category.code,
                             joinedAt: normalizedDate.split('.').reverse().join('-'),
                             description: props.company.description
                         }

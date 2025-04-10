@@ -5,16 +5,19 @@ import { redirect } from 'next/navigation';
 
 import { CompanyStatusType } from '@/enums';
 import { randomNumberMinMax } from '@/mock/randomNumber';
-import { CompanyShema, PromotionShema } from '@/types';
+import { CodeCategory, CodeCountry, CompanyShema, PromotionShema } from '@/types';
 
-import { countries, CodeCountry, categories, CodeCategory } from './../mock/data';
+import { countries, categories } from './../mock/data';
 import { createCompany, createPromotion, deleteCompany, deletePromotion, updateCompany, updatePromotion } from './data';
 
 export async function actionCreateCompany(formData: FormData) {
     const newCompany: Omit<CompanyShema, 'id'> = {
         title: formData.get('title') as string,
         logo: formData.get('logo') as string,
-        category: categories[formData.get('codeCategory') as CodeCategory],
+        category: {
+            title: categories[formData.get('codeCategory') as CodeCategory],
+            code: formData.get('codeCategory') as string,
+        },
         status: formData.get('status') as CompanyStatusType,
         country: {
             title: countries[formData.get('codeCountry') as CodeCountry],
@@ -36,7 +39,10 @@ export async function actionUpdateCompany(id: string, formData: FormData) {
     const newCompany: Omit<CompanyShema, 'id' | 'hasPromotions' | 'sold' | 'income'> = {
         title: formData.get('title') as string,
         logo: formData.get('logo') as string,
-        category: categories[formData.get('codeCategory') as CodeCategory],
+        category: {
+            title: categories[formData.get('codeCategory') as CodeCategory],
+            code: formData.get('codeCategory') as string,
+        },
         status: formData.get('status') as CompanyStatusType,
         country: {
             title: countries[formData.get('codeCountry') as CodeCountry],

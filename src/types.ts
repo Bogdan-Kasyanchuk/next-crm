@@ -2,11 +2,36 @@ import { CompanyStatusType } from './enums';
 
 export type Align = 'left' | 'center' | 'right';
 
+export type CodeCountry =
+    | 'can'
+    | 'usa'
+    | 'ita'
+    | 'ukr'
+    | 'deu'
+    | 'pol'
+    | 'fra'
+    | 'esp'
+    | 'gbr'
+    | 'che'
+
+export type CodeCategory =
+    | 'manufacturing'
+    | 'trade'
+    | 'services'
+    | 'education'
+    | 'finance'
+    | 'construction'
+    | 'science'
+    | 'information'
+
 export type CompanyShema = {
     id: string;
     title: string;
     logo: string;
-    category: string;
+    category: {
+        title: string;
+        code: string;
+    };
     status: CompanyStatusType;
     country: {
         title: string;
@@ -32,7 +57,10 @@ export type CompanyMapper = {
     id: string;
     title: string;
     logo: string;
-    category: string;
+    category: {
+        title: string;
+        code: string;
+    };
     status: CompanyStatusType;
     country: {
         title: string;

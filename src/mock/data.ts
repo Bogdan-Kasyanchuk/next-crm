@@ -1,24 +1,4 @@
-export type CodeCountry =
-    | 'can'
-    | 'usa'
-    | 'ita'
-    | 'ukr'
-    | 'deu'
-    | 'pol'
-    | 'fra'
-    | 'esp'
-    | 'gbr'
-    | 'che'
-
-export type CodeCategory =
-    | 'manufacturing'
-    | 'trade'
-    | 'services'
-    | 'education'
-    | 'finance'
-    | 'construction'
-    | 'science'
-    | 'information'
+import { CodeCategory, CodeCountry } from '@/types';
 
 export const user = {
     fullName: 'Adam Smith',

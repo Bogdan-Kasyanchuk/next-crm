@@ -1,8 +1,9 @@
 import Image from 'next/image';
 
 import { CompanyStatusType } from '@/enums';
-import { categories, countries, CodeCountry, CodeCategory } from '@/mock/data';
+import { categories, countries } from '@/mock/data';
 import { randomImage } from '@/mock/randomImage';
+import { CodeCategory, CodeCountry } from '@/types';
 
 import InputField from './input-field';
 import SelectField from './select-field';

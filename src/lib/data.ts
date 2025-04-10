@@ -26,10 +26,10 @@ export async function fetchStatistics() {
                     label: statisticLabel.totalCategories,
                     value: companies.reduce(
                         (acc, company) => {
-                            if (acc.includes(company.category)) {
+                            if (acc.includes(company.category.code)) {
                                 return acc;
                             }
-                            return [...acc, company.category];
+                            return [...acc, company.category.code];
 
                         }, [] as string[]
                     ).length
@@ -96,15 +96,15 @@ export async function fetchCategories() {
 
             const categories: StatisticsMapper = companies.reduce(
                 (acc, company) => {
-                    if (acc.includes(company.category)) {
+                    if (acc.includes(company.category.code)) {
                         return acc;
                     }
-                    return [...acc, company.category];
+                    return [...acc, company.category.code];
 
                 }, [] as string[]
-            ).map((category) => ({
-                label: category,
-                value: companies.filter((company) => company.category === category).length,
+            ).map((code) => ({
+                label: companies.find((company) => company.category.code === code)!.category.title,
+                value: companies.filter((company) => company.category.code === code).length,
             }));
 
             return categories;
@@ -220,10 +220,7 @@ export async function fetchCompanies() {
                     logo: company.logo,
                     category: company.category,
                     status: company.status,
-                    country: {
-                        title: company.country.title,
-                        code: company.country.code
-                    },
+                    country: company.country,
                     joinedAt: company.joinedAt,
                     hasPromotions: company.hasPromotions,
                     description: company.description,
@@ -256,10 +253,7 @@ export async function fetchCompany(id: string) {
                 logo: company.logo,
                 category: company.category,
                 status: company.status,
-                country: {
-                    title: company.country.title,
-                    code: company.country.code
-                },
+                country: company.country,
                 joinedAt: company.joinedAt,
                 description: company.description
             };
