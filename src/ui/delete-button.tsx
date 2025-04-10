@@ -2,7 +2,7 @@
 
 import { ReactNode, useTransition } from 'react';
 
-import Button from './button';
+import Button from '@/ui/button';
 
 type Props<T> = {
     children: ReactNode,

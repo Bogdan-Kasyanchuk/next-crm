@@ -3,12 +3,11 @@
 import Image from 'next/image';
 import { useState } from 'react';
 
-import Button from './button';
-import CompanyForm from './company-form';
-import Modal from './modal';
-
 import { CompanyStatusType } from '@/enums';
 import { actionUpdateCompany } from '@/lib/actions';
+import Button from '@/ui/button';
+import CompanyForm from '@/ui/company-form';
+import Modal from '@/ui/modal';
 
 type Props = {
     id: string,

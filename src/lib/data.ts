@@ -196,10 +196,9 @@ export async function fetchPromotions() {
     }
 }
 
-export async function fetchCompanies() {
-
+export async function fetchCompanies(query: string,) {
     try {
-        const companiesData = await fetch(`${process.env.API_HOST}/companies`);
+        const companiesData = await fetch(`${process.env.API_HOST}/companies?title=${query}`);
 
         if (!companiesData.ok) {
             console.log('Companies error: ', companiesData.status);
@@ -265,9 +264,9 @@ export async function fetchCompany(id: string) {
     }
 }
 
-export async function fetchCompanyPromotions(id: string) {
+export async function fetchCompanyPromotions(companyId: string, query: string) {
     try {
-        const promotionsData = await fetch(`${process.env.API_HOST}/promotions?companyId=${id}`);
+        const promotionsData = await fetch(`${process.env.API_HOST}/promotions?companyId=${companyId}&title=${query}`);
 
         if (!promotionsData.ok) {
             return [];

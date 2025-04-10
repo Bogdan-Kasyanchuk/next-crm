@@ -1,9 +1,8 @@
 import Image from 'next/image';
 
 import { randomImage } from '@/mock/randomImage';
-
-import InputField from './input-field';
-import SubmitButton from './submit-button';
+import InputField from '@/ui/input-field';
+import SubmitButton from '@/ui/submit-button';
 
 type Props = {
     title: string,

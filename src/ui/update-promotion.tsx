@@ -3,11 +3,10 @@
 import Image from 'next/image';
 import { useState } from 'react';
 
-import Button from './button';
-import Modal from './modal';
-import PromotionForm from './promotion-form';
-
 import { actionUpdatePromotion } from '@/lib/actions';
+import Button from '@/ui/button';
+import Modal from '@/ui/modal';
+import PromotionForm from '@/ui/promotion-form';
 
 type Props = {
     id: string,

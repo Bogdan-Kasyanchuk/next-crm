@@ -4,7 +4,7 @@ import { CloseButton, Dialog, DialogPanel } from '@headlessui/react';
 import Image from 'next/image';
 import { ReactNode } from 'react';
 
-import Button from './button';
+import Button from '@/ui/button';
 
 export type Props = {
     children?: ReactNode;

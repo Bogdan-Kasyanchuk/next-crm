@@ -2,9 +2,8 @@ import Image from 'next/image';
 
 import { actionDeletePromotion } from '@/lib/actions';
 import { PromotionMapper } from '@/types';
-
-import DeleteButton from './delete-button';
-import UpdatePromotion from './update-promotion';
+import DeleteButton from '@/ui/delete-button';
+import UpdatePromotion from '@/ui/update-promotion';
 
 type Props = {
     promotion: PromotionMapper;

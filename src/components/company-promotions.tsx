@@ -2,11 +2,12 @@ import { fetchCompanyPromotions } from '@/lib/data';
 import Promotion from '@/ui/promotion';
 
 type Props = {
-    companyId: string
+    companyId: string,
+    query: string
 };
 
 export default async function CompanyPromotions(props: Props) {
-    const promotions = await fetchCompanyPromotions(props.companyId);
+    const promotions = await fetchCompanyPromotions(props.companyId, props.query);
 
     return (
         <>

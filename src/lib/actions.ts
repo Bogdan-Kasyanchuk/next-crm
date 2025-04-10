@@ -4,10 +4,10 @@ import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 import { CompanyStatusType } from '@/enums';
+import { countries, categories } from '@/mock/data';
 import { randomNumberMinMax } from '@/mock/randomNumber';
 import { CodeCategory, CodeCountry, CompanyShema, PromotionShema } from '@/types';
 
-import { countries, categories } from './../mock/data';
 import { createCompany, createPromotion, deleteCompany, deletePromotion, updateCompany, updatePromotion } from './data';
 
 export async function actionCreateCompany(formData: FormData) {

@@ -5,10 +5,9 @@ import Link from 'next/link';
 import { CompanyStatusType } from '@/enums';
 import { actionDeleteCompany } from '@/lib/actions';
 import { CompanyMapper } from '@/types';
-
-import DeleteButton from '../delete-button';
-import StatusLabel from '../status-label';
-import UpdateCompany from '../update-company';
+import DeleteButton from '@/ui/delete-button';
+import StatusLabel from '@/ui/status-label';
+import UpdateCompany from '@/ui/update-company';
 
 type Props = {
     company: CompanyMapper;

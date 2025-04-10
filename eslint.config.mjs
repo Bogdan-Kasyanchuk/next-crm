@@ -27,7 +27,33 @@ const eslintConfig = [
                             'parent',
                             'sibling',
                             'index'
-                        ]
+                        ],
+                        'unknown',
+                        'object',
+                        'type',
+                    ],
+                    'pathGroups': [
+                        {
+                            'pattern': '@/mock/**',
+                            'group': 'internal'
+                        },
+                        {
+                            'pattern': '@/lib/**',
+                            'group': 'internal'
+                        },
+                        {
+                            'pattern': '@/components/**',
+                            'group': 'internal'
+                        },
+                        {
+                            'pattern': '@/ui/**',
+                            'group': 'internal'
+                        },
+                        {
+                            'pattern': '@/**',
+                            'group': 'internal'
+                        },
+
                     ],
                     'alphabetize': {
                         'order': 'asc'

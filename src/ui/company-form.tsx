@@ -4,10 +4,9 @@ import { CompanyStatusType } from '@/enums';
 import { categories, countries } from '@/mock/data';
 import { randomImage } from '@/mock/randomImage';
 import { CodeCategory, CodeCountry } from '@/types';
-
-import InputField from './input-field';
-import SelectField from './select-field';
-import SubmitButton from './submit-button';
+import InputField from '@/ui/input-field';
+import SelectField from '@/ui/select-field';
+import SubmitButton from '@/ui/submit-button';
 
 type Props = {
     title: string,

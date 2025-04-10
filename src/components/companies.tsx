@@ -2,8 +2,12 @@ import { fetchCompanies } from '@/lib/data';
 import CompanyRow from '@/ui/company-table/company-row';
 import CompanyTable from '@/ui/company-table/company-table';
 
-export default async function Companies() {
-    const companies = await fetchCompanies();
+type Props = {
+    query: string;
+};
+
+export default async function Companies(props: Props) {
+    const companies = await fetchCompanies(props.query);
 
     return (
         <>
