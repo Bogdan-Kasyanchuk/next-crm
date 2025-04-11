@@ -47,7 +47,7 @@ export default function CompanyForm(props: Props) {
                         <input
                             type="text"
                             name="logo"
-                            value={logo}
+                            defaultValue={logo}
                             className="hidden"
                         />
                     </div>

@@ -101,7 +101,7 @@ const eslintConfig = [
             'react/jsx-closing-bracket-location': [
                 'error',
                 {
-                    'location': 'tag-aligned'
+                    'location': 'line-aligned'
                 }
             ],
             // 'react/jsx-indent-props': [ 2, 4 ],

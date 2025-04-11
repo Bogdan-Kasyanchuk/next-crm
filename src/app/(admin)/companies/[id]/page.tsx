@@ -3,7 +3,7 @@ import { Suspense } from 'react';
 
 import CompanyPromotions from '@/components/company-promotions';
 import { fetchCompany } from '@/lib/data';
-import AddPromotionButton from '@/ui/add-promotion-button';
+import ActionButton from '@/ui/action-button';
 import Company from '@/ui/company';
 import Loader from '@/ui/loader/loader';
 import Search from '@/ui/search';
@@ -28,7 +28,20 @@ export default async function Page(props: Props) {
 
     return (
         <div className='l-page__content'>
-            <Toolbar action={<AddPromotionButton id={id} />}>
+            <Toolbar
+                actions={
+                    <>
+                        <ActionButton
+                            rout={`/companies/${id}/company-update`}
+                            label='Update company'
+                        />
+                        <ActionButton
+                            rout={`/companies/${id}/promotion-new`}
+                            label='Add promotion'
+                        />
+                    </>
+                }
+            >
                 <Search placeholder="Search promotions..." />
             </Toolbar>
 

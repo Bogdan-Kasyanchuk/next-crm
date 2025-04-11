@@ -33,7 +33,6 @@ export async function actionCreateCompany(formData: FormData) {
     await createCompany(newCompany);
 
     revalidatePath('/dashboard');
-    revalidatePath('/companies');
 
     redirect('/companies');
 }
@@ -58,14 +57,14 @@ export async function actionUpdateCompany(id: string, formData: FormData) {
     await updateCompany(id, newCompany);
 
     revalidatePath('/dashboard');
-    revalidatePath('/companies');
+
+    redirect(`/companies/${id}`);
 }
 
 export async function actionDeleteCompany({ id }: { id: string }) {
     await deleteCompany(id);
 
     revalidatePath('/dashboard');
-    revalidatePath('/companies');
 }
 
 export async function actionCreatePromotion(companyId: string, formData: FormData) {
@@ -80,7 +79,6 @@ export async function actionCreatePromotion(companyId: string, formData: FormDat
     await createPromotion(newPromotion);
 
     revalidatePath('/dashboard');
-    revalidatePath('/companies');
 
     redirect(`/companies/${companyId}`);
 }
@@ -102,5 +100,4 @@ export async function actionDeletePromotion({ companyId, id }: { companyId: stri
     await deletePromotion(companyId, id);
 
     revalidatePath('/dashboard');
-    revalidatePath('/companies');
 }

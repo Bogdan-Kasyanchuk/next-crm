@@ -7,15 +7,12 @@ import { actionDeleteCompany } from '@/lib/actions';
 import { CompanyMapper } from '@/types';
 import DeleteButton from '@/ui/delete-button';
 import StatusLabel from '@/ui/status-label';
-import UpdateCompany from '@/ui/update-company';
 
 type Props = {
     company: CompanyMapper;
 };
 
 export default function CompanyRow(props: Props) {
-    const normalizedDate = new Date(props.company.joinedAt).toLocaleDateString('uk-UA');
-
     return (
         <tr className='text-center text-sm text-gray-900 bg-white h-13'>
             <td
@@ -71,31 +68,22 @@ export default function CompanyRow(props: Props) {
                 </div>
             </td>
             <td className='min-w-[120px]'>{props.company.country.title}</td>
-            <td className='rounded-r min-w-[130px]'>{normalizedDate}</td>
-            <td className='w-[86px] min-w-[86px]'>
-                <div className='inline-flex items-center gap-x-2.5'>
-                    <DeleteButton
-                        className='!px-2.5'
-                        actionProps={{ id: props.company.id }}
-                        action={actionDeleteCompany}
-                    >
-                        <Image
-                            width={18}
-                            height={18}
-                            src='/icons/trash.svg'
-                            alt='Delete'
-                        />
-                    </DeleteButton>
-                    <UpdateCompany
-                        id={props.company.id}
-                        status={props.company.status}
-                        codeCountry={props.company.country.code}
-                        title={props.company.title}
-                        codeCategory={props.company.category.code}
-                        joinedAt={normalizedDate.split('.').reverse().join('-')}
-                        description={props.company.description}
+            <td className='rounded-r min-w-[130px]'>
+                {new Date(props.company.joinedAt).toLocaleDateString('uk-UA')}
+            </td>
+            <td className='w-[40px] min-w-[40px]'>
+                <DeleteButton
+                    className='!px-2.5'
+                    actionProps={{ id: props.company.id }}
+                    action={actionDeleteCompany}
+                >
+                    <Image
+                        width={18}
+                        height={18}
+                        src='/icons/trash.svg'
+                        alt='Delete'
                     />
-                </div>
+                </DeleteButton>
             </td>
         </tr >
     );

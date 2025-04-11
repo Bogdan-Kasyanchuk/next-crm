@@ -3,8 +3,8 @@ import { CompanyMapper, CompanyShema, CountriesMapper, PromotionMapper, Promotio
 
 export async function fetchStatistics() {
     try {
-        const companiesData = await fetch(`${process.env.API_HOST}/companies`);
-        const promotionsData = await fetch(`${process.env.API_HOST}/promotions`);
+        const companiesData = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/companies`);
+        const promotionsData = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/promotions`);
 
         if (!promotionsData.ok || !companiesData.ok) {
             console.log(
@@ -60,7 +60,7 @@ export async function fetchStatistics() {
 
 export async function fetchSales() {
     try {
-        const companiesData = await fetch(`${process.env.API_HOST}/companies`);
+        const companiesData = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/companies`);
 
         if (!companiesData.ok) {
             console.log('Companies error: ', companiesData.status);
@@ -89,7 +89,7 @@ export async function fetchSales() {
 
 export async function fetchCategories() {
     try {
-        const companiesData = await fetch(`${process.env.API_HOST}/companies`);
+        const companiesData = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/companies`);
 
         if (!companiesData.ok) {
             console.log('Companies error: ', companiesData.status);
@@ -121,7 +121,7 @@ export async function fetchCategories() {
 
 export async function fetchCountries() {
     try {
-        const companiesData = await fetch(`${process.env.API_HOST}/companies`);
+        const companiesData = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/companies`);
 
         if (!companiesData.ok) {
             console.log('Companies error: ', companiesData.status);
@@ -154,8 +154,8 @@ export async function fetchCountries() {
 
 export async function fetchPromotions() {
     try {
-        const companiesData = await fetch(`${process.env.API_HOST}/companies`);
-        const promotionsData = await fetch(`${process.env.API_HOST}/promotions`);
+        const companiesData = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/companies`);
+        const promotionsData = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/promotions`);
 
         if (!companiesData.ok || !promotionsData.ok) {
             console.log(
@@ -198,7 +198,7 @@ export async function fetchPromotions() {
 
 export async function fetchCompanies(query: string,) {
     try {
-        const companiesData = await fetch(`${process.env.API_HOST}/companies?title=${query}`);
+        const companiesData = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/companies?title=${query}`);
 
         if (!companiesData.ok) {
             console.log('Companies error: ', companiesData.status);
@@ -235,7 +235,7 @@ export async function fetchCompanies(query: string,) {
 
 export async function fetchCompany(id: string) {
     try {
-        const companyData = await fetch(`${process.env.API_HOST}/companies/${id}`);
+        const companyData = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/companies/${id}`);
 
         if (!companyData.ok) {
             console.log('Company error: ', companyData.status);
@@ -266,7 +266,7 @@ export async function fetchCompany(id: string) {
 
 export async function fetchCompanyPromotions(companyId: string, query: string) {
     try {
-        const promotionsData = await fetch(`${process.env.API_HOST}/promotions?companyId=${companyId}&title=${query}`);
+        const promotionsData = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/promotions?companyId=${companyId}&title=${query}`);
 
         if (!promotionsData.ok) {
             return [];
@@ -284,7 +284,7 @@ export async function fetchCompanyPromotions(companyId: string, query: string) {
 export async function createCompany(newCompany: Omit<CompanyShema, 'id'>) {
     try {
         const companyData = await fetch(
-            `${process.env.API_HOST}/companies`,
+            `${process.env.NEXT_PUBLIC_API_HOST}/companies`,
             {
                 method: 'POST',
                 headers: { 'content-type': 'application/json' },
@@ -311,7 +311,7 @@ export async function updateCompany(
 ) {
     try {
         const companyData = await fetch(
-            `${process.env.API_HOST}/companies/${id}`,
+            `${process.env.NEXT_PUBLIC_API_HOST}/companies/${id}`,
             {
                 method: 'PUT',
                 headers: { 'content-type': 'application/json' },
@@ -335,7 +335,7 @@ export async function updateCompany(
 export async function deleteCompany(id: string) {
     try {
         const companyData = await fetch(
-            `${process.env.API_HOST}/companies/${id}`,
+            `${process.env.NEXT_PUBLIC_API_HOST}/companies/${id}`,
             {
                 method: 'DELETE',
             }
@@ -347,7 +347,7 @@ export async function deleteCompany(id: string) {
             const company: CompanyShema = await companyData.json();
 
             if (company.hasPromotions) {
-                const promotionsData = await fetch(`${process.env.API_HOST}/promotions?companyId=${id}`);
+                const promotionsData = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/promotions?companyId=${id}`);
 
                 if (!promotionsData.ok) {
                     console.log('Promotions error: ', promotionsData.status);
@@ -371,7 +371,7 @@ export async function deleteCompany(id: string) {
 export async function createPromotion(newPromotion: Omit<PromotionShema, 'id'>) {
     try {
         const promotionData = await fetch(
-            `${process.env.API_HOST}/promotions`,
+            `${process.env.NEXT_PUBLIC_API_HOST}/promotions`,
             {
                 method: 'POST',
                 headers: { 'content-type': 'application/json' },
@@ -383,7 +383,7 @@ export async function createPromotion(newPromotion: Omit<PromotionShema, 'id'>) 
             console.log('Promotion error: ', promotionData.status);
         } else {
             const companyData = await fetch(
-                `${process.env.API_HOST}/companies/${newPromotion.companyId}`,
+                `${process.env.NEXT_PUBLIC_API_HOST}/companies/${newPromotion.companyId}`,
                 {
                     method: 'PUT',
                     headers: { 'content-type': 'application/json' },
@@ -411,7 +411,7 @@ export async function updatePromotion(
 ) {
     try {
         const promotionData = await fetch(
-            `${process.env.API_HOST}/promotions/${id}`,
+            `${process.env.NEXT_PUBLIC_API_HOST}/promotions/${id}`,
             {
                 method: 'PUT',
                 headers: { 'content-type': 'application/json' },
@@ -435,7 +435,7 @@ export async function updatePromotion(
 export async function deletePromotion(companyId: string, id: string) {
     try {
         const promotionData = await fetch(
-            `${process.env.API_HOST}/promotions/${id}`,
+            `${process.env.NEXT_PUBLIC_API_HOST}/promotions/${id}`,
             {
                 method: 'DELETE',
             }
@@ -444,11 +444,11 @@ export async function deletePromotion(companyId: string, id: string) {
         if (!promotionData.ok) {
             console.log('Promotion error: ', promotionData.status);
         } else {
-            const promotionsData = await fetch(`${process.env.API_HOST}/promotions?companyId=${companyId}`);
+            const promotionsData = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/promotions?companyId=${companyId}`);
 
             if (!promotionsData.ok) {
                 const companyData = await fetch(
-                    `${process.env.API_HOST}/companies/${companyId}`,
+                    `${process.env.NEXT_PUBLIC_API_HOST}/companies/${companyId}`,
                     {
                         method: 'PUT',
                         headers: { 'content-type': 'application/json' },
@@ -474,7 +474,7 @@ export async function deletePromotion(companyId: string, id: string) {
 async function deleteOnePromotion(id: string) {
     try {
         const promotionData = await fetch(
-            `${process.env.API_HOST}/promotions/${id}`,
+            `${process.env.NEXT_PUBLIC_API_HOST}/promotions/${id}`,
             {
                 method: 'DELETE',
             }

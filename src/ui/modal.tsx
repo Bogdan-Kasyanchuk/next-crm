@@ -24,15 +24,16 @@ export default function Modal(props: Props) {
 
             <DialogPanel className="relative overflow-hidden rounded-lg bg-white shadow-xl p-5 mx-auto sm:my-10 w-full sm:max-w-2xl">
                 {props.children}
-                <CloseButton className='text-xl absolute top-5 right-5'>
-                    <Button className='!p-1.5'>
-                        <Image
-                            width={18}
-                            height={18}
-                            src='/icons/close.svg'
-                            alt='Close'
-                        />
-                    </Button>
+                <CloseButton
+                    as={Button}
+                    className='text-xl absolute top-5 right-5 !p-1.5'
+                >
+                    <Image
+                        width={18}
+                        height={18}
+                        src='/icons/close.svg'
+                        alt='Close'
+                    />
                 </CloseButton>
             </DialogPanel>
         </Dialog>

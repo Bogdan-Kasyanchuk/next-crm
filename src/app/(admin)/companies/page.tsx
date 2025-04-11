@@ -1,7 +1,7 @@
 import { Suspense } from 'react';
 
 import Companies from '@/components/companies';
-import AddCompanyButton from '@/ui/add-company-button';
+import ActionButton from '@/ui/action-button';
 import Loader from '@/ui/loader/loader';
 import Search from '@/ui/search';
 import Toolbar from '@/ui/toolbar';
@@ -16,7 +16,14 @@ export default async function Page(props: Props) {
 
     return (
         <div className='l-page__content'>
-            <Toolbar action={<AddCompanyButton />}>
+            <Toolbar
+                actions={
+                    <ActionButton
+                        rout='/companies/company-new'
+                        label='Add company'
+                    />
+                }
+            >
                 <Search placeholder="Search companies..." />
             </Toolbar>
 

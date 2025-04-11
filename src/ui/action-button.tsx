@@ -5,21 +5,22 @@ import { useRouter } from 'next/navigation';
 import Button from '@/ui/button';
 
 type Props = {
-    id: string
+    label: string
+    rout: string
 };
 
-export default function AddPromotionButton(props: Props) {
+export default function ActionButton(props: Props) {
     const router = useRouter();
 
     return (
         <Button
             onClick={
                 () => {
-                    router.push(`/companies/${props.id}/promotion-new`, { scroll: false });
+                    router.push(props.rout, { scroll: false });
                 }
             }
         >
-            Add promotion
+            {props.label}
         </Button>
     );
 }
