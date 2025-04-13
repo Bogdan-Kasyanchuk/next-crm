@@ -1,25 +1,24 @@
-import { fetchCompanyPromotions } from '@/lib/data';
+import { fetchPromotionsPage } from '@/lib/data';
 import Promotion from '@/ui/promotion';
 
 type Props = {
-    companyId: string,
-    query: string
+    query: string;
 };
 
-export default async function CompanyPromotions(props: Props) {
-    const promotions = await fetchCompanyPromotions(props.companyId, props.query);
+export default async function PromotionsPage(props: Props) {
+    const promotions = await fetchPromotionsPage(props.query);
 
     return (
         <>
             {
-                promotions.length > 0
+                promotions
                     ? <div className="grid grid-cols-12 gap-5">
                         {
                             promotions.map(
                                 (promotion) => (
                                     <div
                                         key={promotion.id}
-                                        className="col-span-4"
+                                        className="col-span-3"
                                     >
                                         <Promotion promotion={promotion} />
                                     </div>

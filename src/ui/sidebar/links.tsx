@@ -16,6 +16,11 @@ const links = [
         href: '/companies',
         icon: '/icons/briefcase.svg',
     },
+    {
+        name: 'Promotions',
+        href: '/promotions',
+        icon: '/icons/promotion.svg',
+    },
 ];
 
 export default function Links() {

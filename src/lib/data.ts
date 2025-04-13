@@ -233,6 +233,25 @@ export async function fetchCompanies(query: string,) {
     }
 }
 
+export async function fetchPromotionsPage(query: string,) {
+    try {
+        const promotionsData = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/promotions?title=${query}`);
+
+        if (!promotionsData.ok) {
+            console.log('Promotions error: ', promotionsData.status);
+
+            return undefined;
+        } else {
+            const promotions: PromotionMapper[] = await promotionsData.json();
+
+            return promotions;
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error('Failed to fetch the promotions.');
+    }
+}
+
 export async function fetchCompany(id: string) {
     try {
         const companyData = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/companies/${id}`);

@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 type Props = {
     children: ReactNode;
-    actions: ReactNode;
+    actions?: ReactNode;
 }
 
 export default function Toolbar(props: Props) {
