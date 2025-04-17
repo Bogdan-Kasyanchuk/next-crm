@@ -300,6 +300,26 @@ export async function fetchCompanyPromotions(companyId: string, query: string) {
     }
 }
 
+export async function fetchPromotion(id: string) {
+    try {
+        const promotionData = await fetch(`${process.env.NEXT_PUBLIC_API_HOST}/promotions/${id}`);
+
+        if (!promotionData.ok) {
+            console.log('Promotion error: ', promotionData.status);
+
+            return undefined;
+        } else {
+
+            const promotion: PromotionMapper = await promotionData.json();
+
+            return promotion;
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        throw new Error('Failed to fetch the .');
+    }
+}
+
 export async function createCompany(newCompany: Omit<CompanyShema, 'id'>) {
     try {
         const companyData = await fetch(

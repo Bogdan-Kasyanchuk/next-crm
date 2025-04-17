@@ -17,12 +17,11 @@ export default async function CompanyPromotions(props: Props) {
                         {
                             promotions.map(
                                 (promotion) => (
-                                    <div
+                                    <Promotion
                                         key={promotion.id}
                                         className="col-span-4"
-                                    >
-                                        <Promotion promotion={promotion} />
-                                    </div>
+                                        promotion={promotion}
+                                    />
                                 )
                             )
                         }

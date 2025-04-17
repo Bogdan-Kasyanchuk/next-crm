@@ -16,12 +16,11 @@ export default async function PromotionsPage(props: Props) {
                         {
                             promotions.map(
                                 (promotion) => (
-                                    <div
+                                    <Promotion
                                         key={promotion.id}
                                         className="col-span-3"
-                                    >
-                                        <Promotion promotion={promotion} />
-                                    </div>
+                                        promotion={promotion}
+                                    />
                                 )
                             )
                         }

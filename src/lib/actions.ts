@@ -79,6 +79,7 @@ export async function actionCreatePromotion(companyId: string, formData: FormDat
     await createPromotion(newPromotion);
 
     revalidatePath('/dashboard');
+    revalidatePath('/promotions');
 
     redirect(`/companies/${companyId}`);
 }
@@ -94,10 +95,16 @@ export async function actionUpdatePromotion(id: string, formData: FormData) {
     await updatePromotion(id, newPromotion);
 
     revalidatePath('/companies/[id]', 'page');
+    revalidatePath('/dashboard');
+    revalidatePath('/promotions');
+
+    redirect(`/promotions/${id}`);
 }
 
 export async function actionDeletePromotion({ companyId, id }: { companyId: string, id: string }) {
     await deletePromotion(companyId, id);
 
+    revalidatePath('/companies/[id]', 'page');
     revalidatePath('/dashboard');
+    revalidatePath('/promotions');
 }
