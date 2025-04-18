@@ -316,7 +316,7 @@ export async function fetchPromotion(id: string) {
         }
     } catch (error) {
         console.error('Error:', error);
-        throw new Error('Failed to fetch the .');
+        throw new Error('Failed to fetch the promotion.');
     }
 }
 
